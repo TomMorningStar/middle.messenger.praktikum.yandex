@@ -1,0 +1,135 @@
+.root-dialogues {
+  background-color: #fbfbfb;
+
+  nav {
+    padding: 21px 10px 0 10px;
+    border-bottom: 1px solid #eaeaea;
+
+    .navigate-wrapper {
+      margin-bottom: 23px;
+      display: flex;
+      justify-content: right;
+      .navigate {
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+      }
+
+      span {
+        color: #999;
+        font-weight: 600;
+        font-size: 12px;
+        margin-right: 8px;
+      }
+    }
+
+    .search-dialog-wrapper {
+      padding: 10px 7px;
+      margin-bottom: 14px;
+      border-radius: 5px;
+      background-color: #efefef;
+
+      .search-dialog {
+        display: flex;
+        align-items: center;
+      }
+
+      input {
+        width: 100%;
+        display: inline-block;
+        margin-left: 5px;
+        border: none;
+        background-color: #efefef;
+        outline: none;
+      }
+    }
+  }
+  .dialogues {
+    height: 770px;
+    overflow-y: scroll;
+    padding: 0 0 0 10px;
+
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fbfbfb;
+      border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 5px solid transparent;
+      border-radius: 100px;
+      background-color: #3369f3;
+      background-clip: content-box;
+    }
+
+    .dialog-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0px;
+
+      border-bottom: 1px solid #eaeaea;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e4edfd;
+        transition: 0.3s;
+      }
+    }
+
+    .item-img {
+      width: 47px;
+      height: 47px;
+      background-color: #efefef;
+      border-radius: 100%;
+    }
+
+    .item-info-wrappper {
+      margin-left: 12px;
+      .item-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        .time {
+          color: #999;
+          font-size: 9px;
+        }
+      }
+
+      .item-nickName {
+        color: #1e1e1e;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .item-text {
+        font-size: 12px;
+        color: #999;
+      }
+
+      .item-nickName,
+      .item-text {
+        width: 193px;
+        margin-right: 4px;
+      }
+
+      .item-amount-messages {
+        position: absolute;
+        right: 1;
+        top: 10;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 100%;
+        color: #fff;
+        background-color: #3369f3;
+        text-align: center;
+        font-size: 11px;
+      }
+    }
+  }
+}

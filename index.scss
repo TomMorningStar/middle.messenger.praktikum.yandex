@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Inter';
+}
+
+body {
+  margin: 0;
+  background-color: #efefef;
+  overflow: hidden;
+}
+
+main {
+  display: flex;
+  max-width: 1600px;
+  margin: auto;
+  background-color: #fff;
+}
+
+.no-styles {
+  background-color: unset;
+  border: none;
+  display: block;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@import url(./src/styles/authPage.scss);
+@import url(./src/styles/dialoguesComponent.scss);
+@import url(./src/styles/chatSection.scss);
+@import url(./src/styles/profilePage.scss);
+@import url(./src/styles/errorPages.scss);

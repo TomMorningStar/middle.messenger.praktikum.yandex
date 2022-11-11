@@ -1,0 +1,27 @@
+<div class='authPage'>
+  <div class='authCart'>
+
+    <h3>Регистрация</h3>
+    <form action="">
+        {{> authInfoBlock info='Почта'}}
+        {{> authInfoBlock info='Логин'}}
+        {{> authInfoBlock info='Имя'}}
+        {{> authInfoBlock info='Фамилия'}}
+        {{> authInfoBlock info='Телефон'}}
+        {{> authInfoBlock info='Пароль'}}
+        {{> authInfoBlock info='Пароль (ещё раз)'}}
+    </form>
+
+    <div class='navigate-page-block-sign-up'>
+      <div class='auth-reg-button-block'>
+        <button class='cursor-pointer'>Зарегистрироваться</button>
+      </div>
+      <div class='sing-up-in-button-block'>
+        <button
+          onclick="window.renderPage('authPage')"
+          class='cursor-pointer'
+        >Войти</button>
+      </div>
+    </div>
+  </div>
+</div>

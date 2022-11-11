@@ -1,0 +1,27 @@
+
+
+
+<div class='authPage'>
+  <div class='authCart'>
+
+    <h3>Вход</h3>
+
+        {{> authInfoBlock info='Логин'}}
+        {{> authInfoBlock info='Пароль'}}
+
+    <div class='navigate-page-block'>
+      <div class='auth-reg-button-block'>
+        <button
+          onclick="window.renderPage('homePage')"
+          class='cursor-pointer'
+        >Авторизоваться</button>
+      </div>
+      <div class='sing-up-in-button-block'>
+        <button
+          onclick="window.renderPage('signUpPage')"
+          class='cursor-pointer'
+        >Нет аккаунта?</button>
+      </div>
+    </div>
+  </div>
+</div>

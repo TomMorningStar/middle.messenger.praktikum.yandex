@@ -1,0 +1,26 @@
+<div class='profle-page-wrapper'>
+  <div
+    onclick="window.renderPage('profile')"
+    class='back-button-wrapper cursor-pointer'
+  >
+    <div class='back-button'>{{>leftButtonBackToHome}}</div>
+  </div>
+  <div class='info-profile-wrapper-block'>
+    <div class='profile-avatar cursor-pointer profile-avatar-change'>
+        {{>profileAvatar}}
+    </div>
+
+    <div class='profile-info-block'>
+      {{>changeInfo key='Почта' value='pochta@yandex.ru'}}
+      {{>changeInfo key='Логин' value='ivanivanov'}}
+      {{>changeInfo key='Имя' value='Иван'}}
+      {{>changeInfo key='Фамилия' value='Иванов'}}
+      {{>changeInfo key='Имя в чате' value='Иван'}}
+      {{>changeInfo key='Телефон' value='+7-(909)-967-30-30'}}
+    </div>
+    
+    <div  onclick="window.renderPage('profile')">
+      <button class="save-datas-button no-styles cursor-pointer">Сохранить</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+.chat-section {
+  width: 100%;
+  border-left: 1px solid #eaeaea;
+  padding: 0 20px;
+  position: relative;
+
+  .chat-dialog-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0;
+
+    .chat-dialog-info-img {
+      margin-right: 10px;
+      width: 34px;
+      height: 34px;
+      background-color: #efefef;
+      border-radius: 100%;
+    }
+
+    .chat-dialog-info-nickname {
+      color: #1e1e1e;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .chat-dialog-info-nickname,
+    .chat-dialog-info-img {
+      cursor: pointer;
+    }
+
+    .chat-dialog-options {
+      padding: 0 0 0 10px;
+    }
+  }
+
+  .chat-section-messages-wrapper {
+    background-image: url('https://damion.club/uploads/posts/2022-09/1663963614_4-damion-club-p-temnii-fon-dlya-telegram-pinterest-6.jpg');
+    height: 93%;
+    position: relative;
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      // font-size: 15px;
+      position: absolute;
+      top: 40%;
+      left: 45%;
+    }
+
+    .message-input-field {
+      width: 100%;
+      border-top: 1px solid #eaeaea;
+      position: absolute;
+      bottom: 0;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+
+      .inp-value-message {
+        .select-file {
+          widows: 32px;
+          height: 32px;
+        }
+
+        svg {
+          vertical-align: middle;
+        }
+
+        margin: 0 10px;
+        width: 100%;
+
+        input {
+          min-width: 100%;
+          border-radius: 30px;
+          border: none;
+          background-color: #efefef;
+          outline: none;
+          padding: 10px 20px;
+        }
+      }
+    }
+
+    .send-message-button {
+      widows: 32px;
+      height: 32px;
+      button {
+        vertical-align: middle;
+        border: none;
+        background-color: unset;
+      }
+    }
+  }
+}
