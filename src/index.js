@@ -1,7 +1,8 @@
+import Handlebars from 'handlebars/dist/handlebars.runtime';
 import home from './pages/home.hbs';
 
 import dialogues from './components/dialogues.hbs';
-import profileNavigate from './components/dialog-components/profileNavigate.hbs';
+import profileNavigate from './components/dialog-components/profileNavigate/profileNavigate.hbs';
 import dialogItem from './components/dialog-components/dialogItem.hbs';
 import authPage from './pages/authPage.hbs';
 import signUp from './pages/signUp.hbs';
@@ -9,10 +10,11 @@ import profile from './pages/profile.hbs';
 import info from './components/profile-components/info.hbs';
 import changeInfo from './components/profile-components/changeInfo.hbs';
 import changePassword from './components/profile-components/changePassword.hbs';
-import changeDatas from './components/profile-components/changeDatas.hbs';
+import changeData from './components/profile-components/changeData.hbs';
 import authInfoBlock from './components/auth-components/authInfoBlock.hbs';
 import dialogInfo from './components/chat-components/dialogInfo.hbs';
 import chatSection from './components/chat-components/chatSection.hbs';
+
 import serveError from './pages/serveError.hbs';
 import serveBadRequest from './pages/serveBadRequest.hbs';
 
@@ -21,8 +23,6 @@ import profileAvatar from './assets/profileAvatar.hbs';
 import sendMeggageButton from './assets/sendMeggageButton.hbs';
 import selectFile from './assets/selectFile.hbs';
 import dialogMenu from './assets/dialogMenu.hbs';
-
-import Handlebars from 'handlebars/dist/handlebars.runtime';
 
 function renderPage(name) {
   const root = document.querySelector('#root');
@@ -40,8 +40,8 @@ function renderPage(name) {
     case 'profile':
       root.innerHTML = profile();
       break;
-    case 'changeDatas':
-      root.innerHTML = changeDatas();
+    case 'changeData':
+      root.innerHTML = changeData();
       break;
     case 'changePassword':
       root.innerHTML = changePassword();
@@ -79,4 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.querySelector('#root');
   root.innerHTML = home();
+
+  const node = document.getElementById('message');
+
+  for (const child of node.children) {
+    if (child.children[0].textContent.length >= 160) {
+      child.children[0].children[0].style = 'position: absolute';
+    }
+    if (child.children[0].textContent.length >= 156) {
+      child.children[0].children[0].classList.add('time-margin');
+    }
+  }
 });

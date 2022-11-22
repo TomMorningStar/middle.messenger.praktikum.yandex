@@ -2,17 +2,17 @@
   background-color: #fbfbfb;
 
   nav {
-    padding: 21px 10px 0 10px;
+    padding: 21px 10px 0;
     border-bottom: 1px solid #eaeaea;
 
     .navigate-wrapper {
       margin-bottom: 23px;
       display: flex;
       justify-content: right;
+
       .navigate {
         display: flex;
         align-items: center;
-
         cursor: pointer;
       }
 
@@ -45,10 +45,10 @@
       }
     }
   }
+
   .dialogues {
-    height: 770px;
+    height: calc(100% - 112px);
     overflow-y: scroll;
-    padding: 0 0 0 10px;
 
     &::-webkit-scrollbar {
       width: 14px;
@@ -69,8 +69,7 @@
     .dialog-item {
       display: flex;
       justify-content: space-between;
-      padding: 12px 0px;
-
+      padding: 12px 10px;
       border-bottom: 1px solid #eaeaea;
       cursor: pointer;
 
@@ -89,10 +88,12 @@
 
     .item-info-wrappper {
       margin-left: 12px;
+
       .item-info {
         display: flex;
         justify-content: space-between;
         position: relative;
+
         .time {
           color: #999;
           font-size: 9px;

@@ -16,7 +16,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
       border-radius: 100%;
     }
@@ -32,7 +32,7 @@
     top: 50%;
     left: 50%;
     width: 510px;
-    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
     .profile-avatar {
@@ -48,14 +48,14 @@
 
     .profile-avatar-change {
       &:hover {
-        background: #000000;
+        background: #000;
         opacity: 0.5;
       }
     }
   }
 
   .profile-info-block {
-    margin: 40px 0 60px 0;
+    margin: 40px 0 60px;
 
     input {
       border: none;
@@ -73,12 +73,14 @@
         color: #1e1e1e;
         font-size: 15px;
       }
+
       .profile-value {
-        color: #999999;
+        color: #999;
       }
     }
   }
-  .change-datas {
+
+  .change-data {
     color: #5986f8;
     border-bottom: 1px solid #eaeaea;
     padding: 10px 0;
@@ -86,12 +88,12 @@
   }
 
   .exit-in-profile-button {
-    color: #ff0000;
+    color: #f00;
     padding: 10px 0;
     font-weight: 600;
   }
 
-  .save-datas-button {
+  .save-data-button {
     padding: 10px 0;
     display: block;
     background-color: #3369f3;

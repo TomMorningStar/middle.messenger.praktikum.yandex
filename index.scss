@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Inter';
+  font-family: Inter;
 }
 
 body {
@@ -12,6 +12,7 @@ body {
 main {
   display: flex;
   max-width: 1600px;
+  height: 100vh;
   margin: auto;
   background-color: #fff;
 }
@@ -31,8 +32,8 @@ main {
   cursor: pointer;
 }
 
-@import url(./src/styles/authPage.scss);
-@import url(./src/styles/dialoguesComponent.scss);
-@import url(./src/styles/chatSection.scss);
-@import url(./src/styles/profilePage.scss);
-@import url(./src/styles/errorPages.scss);
+@import "./src/styles/authPage.scss";
+@import "./src/styles/dialoguesComponent.scss";
+@import "./src/styles/chatSection.scss";
+@import "./src/styles/profilePage.scss";
+@import "./src/styles/errorPages.scss";
