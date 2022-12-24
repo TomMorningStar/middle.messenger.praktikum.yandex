@@ -36,7 +36,7 @@
   }
 
   .chat-section-messages-wrapper {
-    height: calc(100vh - 112px);
+    height: calc(100vh - 54px);
     position: relative;
     overflow-y: scroll;
 
@@ -57,13 +57,17 @@
     }
 
     .message-input-field {
-      width: 1245px;
       border-top: 1px solid #eaeaea;
-      position: fixed;
-      bottom: 0;
+      align-items: center;
       padding: 10px 0;
       display: flex;
-      align-items: center;
+      position: absolute;
+      bottom: 0;
+      right: 0px;
+      left: 0px;
+      z-index: 1;
+      right: 0;
+      background-color: white;
 
       .inp-value-message {
         .select-file {
@@ -79,7 +83,7 @@
         width: 100%;
 
         input {
-          min-width: 100%;
+          width: 100%;
           border-radius: 30px;
           border: none;
           background-color: #efefef;
@@ -90,14 +94,13 @@
     }
 
     .send-message-button {
-      widows: 32px;
+      padding: 0;
+      cursor: pointer;
+      border: none;
+      background-color: unset;
+      display: block;
+      width: 32px;
       height: 32px;
-
-      button {
-        vertical-align: middle;
-        border: none;
-        background-color: unset;
-      }
     }
 
     .message-time-data {

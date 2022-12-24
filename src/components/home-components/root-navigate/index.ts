@@ -1,0 +1,1 @@
+export { Navigate as default} from './navigate'

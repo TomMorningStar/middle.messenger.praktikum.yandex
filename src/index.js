@@ -1,7 +1,6 @@
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import home from './pages/home.hbs';
 
-import dialogues from './components/dialogues.hbs';
 import profileNavigate from './components/dialog-components/profileNavigate/profileNavigate.hbs';
 import dialogItem from './components/dialog-components/dialogItem.hbs';
 import authPage from './pages/authPage.hbs';
@@ -12,17 +11,9 @@ import changeInfo from './components/profile-components/changeInfo.hbs';
 import changePassword from './components/profile-components/changePassword.hbs';
 import changeData from './components/profile-components/changeData.hbs';
 import authInfoBlock from './components/auth-components/authInfoBlock.hbs';
-import dialogInfo from './components/chat-components/dialogInfo.hbs';
-import chatSection from './components/chat-components/chatSection.hbs';
 
 import serveError from './pages/serveError.hbs';
 import serveBadRequest from './pages/serveBadRequest.hbs';
-
-import leftButtonBackToHome from './assets/leftButtonBackToHome.hbs';
-import profileAvatar from './assets/profileAvatar.hbs';
-import sendMeggageButton from './assets/sendMeggageButton.hbs';
-import selectFile from './assets/selectFile.hbs';
-import dialogMenu from './assets/dialogMenu.hbs';
 
 function renderPage(name) {
   const root = document.querySelector('#root');
@@ -60,22 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // dialog-components
   Handlebars.registerPartial('dialogItem', dialogItem);
-  Handlebars.registerPartial('dialogues', dialogues);
-
-  Handlebars.registerPartial('dialogInfo', dialogInfo);
-  Handlebars.registerPartial('chatSection', chatSection);
 
   // profile-components
   Handlebars.registerPartial('info', info);
   Handlebars.registerPartial('profileNavigate', profileNavigate);
   Handlebars.registerPartial('changeInfo', changeInfo);
-
-  // images
-  Handlebars.registerPartial('leftButtonBackToHome', leftButtonBackToHome);
-  Handlebars.registerPartial('profileAvatar', profileAvatar);
-  Handlebars.registerPartial('sendMeggageButton', sendMeggageButton);
-  Handlebars.registerPartial('selectFile', selectFile);
-  Handlebars.registerPartial('dialogMenu', dialogMenu);
 
   const root = document.querySelector('#root');
   root.innerHTML = home();
