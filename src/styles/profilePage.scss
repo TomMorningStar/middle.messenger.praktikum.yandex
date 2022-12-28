@@ -58,6 +58,7 @@
     margin: 40px 0 60px;
 
     input {
+      font-size: 16px;
       border: none;
       outline: none;
       text-align: end;
@@ -68,6 +69,8 @@
       justify-content: space-between;
       padding: 10px 0;
       border-bottom: 1px solid #eaeaea;
+      align-items: center;
+      height: 45px;
 
       .profile-key {
         color: #1e1e1e;

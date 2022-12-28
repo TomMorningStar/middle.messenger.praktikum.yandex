@@ -5,18 +5,14 @@
     padding: 21px 10px 0;
     border-bottom: 1px solid #eaeaea;
 
-    .navigate-wrapper {
+    .navigate {
       margin-bottom: 23px;
       display: flex;
+      align-items: center;
       justify-content: right;
 
-      .navigate {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-      }
-
       span {
+        cursor: pointer;
         color: #999;
         font-weight: 600;
         font-size: 12px;

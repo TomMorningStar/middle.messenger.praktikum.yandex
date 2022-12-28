@@ -1,35 +1,44 @@
-import Block from '../../../utils/Block';
-import DialogItem from '../dialog-item';
-import { DialogItemProps } from '../dialog-item/dialogItem';
-import template from './dialogues.hbs';
+import { Block } from 'utils';
 
+type DailoguesPropsArray = {
+  dialogues: DailoguesProps;
+};
 
-interface DialoguesProps {
-  dialogues: DialogItemProps[];
+interface DailoguesProps {
+  nickName: string;
+  time: string;
+  messageText: string;
+  messageNotification: number;
+  avatar: string;
 }
 
 export class Dialogues extends Block {
-  constructor(props: DialoguesProps) {
-    super(props);
+  static componentName = 'Dialogues';
+
+  constructor({ dialogues }: DailoguesPropsArray) {
+    super({ dialogues });
   }
-
-  protected initChildren() {
-    this.children.dialogues = this.createChats(this.props);
-  }
-
-  private createChats(props: DialoguesProps) {
-    return props.dialogues.map((dialogItem) => {
-      return new DialogItem({
-        ...dialogItem,
-        events: { click: () => console.log(dialogItem.nickName) },
-      });
-    });
-  }
-
-
 
   render() {
-
-    return this.compile(template, { ...this.props });
+    return `
+    <div class='dialogues'>
+      ${
+        this.props.dialogues
+          ? this.props.dialogues
+              .map((item) => {
+                return `{{{DialogItem 
+                  nickName="${item.nickName}"
+                  time="${item.time}" 
+                  messageText="${item.messageText}"
+                  messageNotification="${
+                    item.messageNotification ? item.messageNotification : ''
+                  }"
+                  avatar="${item.avatar}"
+                }}}`;
+              })
+              .join('')
+          : ''
+      } 
+    </div>`;
   }
 }

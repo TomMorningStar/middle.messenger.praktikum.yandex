@@ -1,0 +1,1 @@
+export { ProfileButtonPasswordData as default} from './profileButtonChangePassword';

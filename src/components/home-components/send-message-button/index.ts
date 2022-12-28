@@ -1,1 +1,1 @@
-export { SendMessageButton as default} from './sendMessageButton'
+export { SendMessageButton as default } from './sendMessageButton';

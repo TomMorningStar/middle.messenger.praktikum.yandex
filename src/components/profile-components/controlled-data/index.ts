@@ -1,0 +1,1 @@
+export { ControlledData as default} from './controlledData';

@@ -10,12 +10,12 @@
     align-items: center;
     border-bottom: 1px solid #eaeaea;
     padding: 10px 0;
+    position: relative;
 
     .chat-dialog-info-img {
       margin-right: 10px;
       width: 34px;
       height: 34px;
-      background-color: #efefef;
       border-radius: 100%;
     }
 
@@ -39,6 +39,7 @@
     height: calc(100vh - 54px);
     position: relative;
     overflow-y: scroll;
+
 
     &::-webkit-scrollbar {
       width: 14px;
@@ -70,9 +71,11 @@
       background-color: white;
 
       .inp-value-message {
+
+
         .select-file {
-          widows: 32px;
-          height: 32px;
+          width: 35px;
+          height: 35px;
         }
 
         svg {
