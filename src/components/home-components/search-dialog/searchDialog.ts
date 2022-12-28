@@ -14,7 +14,7 @@ export class SearchDialogComponent extends Block {
             fill='#999999'
             ></path>
         </svg>
-        <input type='text' placeholder='Поиск' />
+        <input type='text' name="message" placeholder='Поиск' />
         </div>
     </div>
     `;

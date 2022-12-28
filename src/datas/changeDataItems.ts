@@ -2,7 +2,7 @@
     {
       ref: 'mailRef',
       type: 'mail',
-      name: 'mail',
+      name: 'email',
       placeholder: 'pochta@yandex.ru',
       label: 'Почта',
       errorClass: 'profile-error',
@@ -31,7 +31,7 @@
     },
     {
       ref: 'lastNameRef',
-      name: 'last_name',
+      name: 'second_name',
       placeholder: 'Иванов',
       type: 'last_name',
       label: 'Фамилия',
@@ -41,7 +41,7 @@
     },
     {
       ref: 'firstNameInChatRef',
-      name: 'first_name',
+      name: 'display_name',
       placeholder: 'Иван',
       type: 'last_name',
       label: 'Имя в чате',

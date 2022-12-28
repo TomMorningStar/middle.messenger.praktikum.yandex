@@ -1,4 +1,4 @@
-enum METHOD {
+enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -7,46 +7,31 @@ enum METHOD {
 }
 
 type Options = {
-  method: METHOD;
+  method: METHODS;
   data?: any;
 };
 
-// Тип Omit принимает два аргумента: первый — тип, второй — строка
-// и удаляет из первого типа ключ, переданный вторым аргументом
 type OptionsWithoutMethod = Omit<Options, 'method'>;
-// Этот тип эквивалентен следующему:
-// type OptionsWithoutMethod = { data?: any };
 
-class HTTPTransport {
-  get(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.GET });
-  }
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
 
-  post(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.POST });
-  }
-  put(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.PUT });
-  }
-  delete(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.DELETE });
-  }
+export class HTTPTransport {
+  get: HTTPMethod = (url, options = {}) => (
+    this.request(url, {...options, method: METHODS.GET})
+  )
+  put: HTTPMethod = (url, options = {}) => (
+    this.request(url, {...options, method: METHODS.PUT})
+  )
+  post: HTTPMethod = (url, options = {}) => (
+    this.request(url, {...options, method: METHODS.POST})
+  )
+  delete: HTTPMethod = (url, options = {}) => (
+    this.request(url, {...options, method: METHODS.DELETE})
+  )
 
   request(
     url: string,
-    options: Options = { method: METHOD.GET }
+    options: Options = { method: METHODS.GET }
   ): Promise<XMLHttpRequest> {
     const { method, data } = options;
 
@@ -68,7 +53,7 @@ class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      if (method === METHOD.GET || !data) {
+      if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
         xhr.send(data);

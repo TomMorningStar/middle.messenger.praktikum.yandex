@@ -21,7 +21,6 @@ export function validateForm(rules: ValidateRule[]) {
   let mail = '';
   let login = '';
   let firstName = '';
-  let nameInChat = '';
   let lastName = '';
   let phone = '';
   let password = '';

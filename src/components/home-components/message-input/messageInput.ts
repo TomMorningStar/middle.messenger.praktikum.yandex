@@ -10,6 +10,6 @@ export class MessageInput extends Block {
   }
 
   render() {
-    return `<input type='text'placeholder='Сообщение'  class={{error}} />`;
+    return `<input type='text'placeholder='Сообщение' name="message"  class={{error}} />`;
   }
 }

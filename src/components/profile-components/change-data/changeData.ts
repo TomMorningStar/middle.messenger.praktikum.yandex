@@ -9,7 +9,7 @@ export class ChangeData extends Block {
   render() {
     return `
     <div>
-        <div class='profile-avatar cursor-pointer profile-avatar-change'>
+        <div class='profile-avatar name="avatar" cursor-pointer profile-avatar-change'>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='40'

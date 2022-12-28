@@ -8,7 +8,7 @@ export class SignUp extends Block {
     super();
 
     this.setProps({
-      labelClass: "info",
+      labelClass: 'info',
       onSubmit: () => {
         const errorMessage = validateForm([
           {
@@ -105,82 +105,83 @@ export class SignUp extends Block {
 
   render() {
     return `
-    <div class='authPage'>
-      <div class='authCart'>
-        <h3>Регистрация</h3>
+    <main>
+      <div class='authPage'>
+        <div class='authCart'>
+          <h3>Регистрация</h3>
 
-          <form action=''>
+            <form action=''>
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="mailRef"
-            name="mail"
-            placeholder="..."
-            type="text"
-            label="Почта"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="mailRef"
+              name="email"
+              placeholder="..."
+              type="text"
+              label="Почта"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="loginInputRef"
-            name="login"
-            placeholder="..."
-            type="login"
-            label="Логин"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="loginInputRef"
+              name="login"
+              placeholder="..."
+              type="login"
+              label="Логин"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="firstNameRef"
-            name="first_name"
-            placeholder="..."
-            type="first_name"
-            label="Имя"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="firstNameRef"
+              name="first_name"
+              placeholder="..."
+              type="first_name"
+              label="Имя"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="lastNameRef"
-            name="last_name"
-            placeholder="..."
-            type="last_name"
-            label="Фамилия"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="lastNameRef"
+              name="second_name"
+              placeholder="..."
+              type="last_name"
+              label="Фамилия"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="phoneRef"
-            name="phone"
-            placeholder="..."
-            type="phone"
-            label="Номер"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="phoneRef"
+              name="phone"
+              placeholder="..."
+              type="phone"
+              label="Номер"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="firstPasswordRef"
-            name="password"
-            placeholder="..."
-            type="password"
-            label="Пароль"
-          }}}
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="firstPasswordRef"
+              name="password"
+              placeholder="..."
+              type="password"
+              label="Пароль"
+            }}}
 
-          {{{ControlledInput
-            labelClass=labelClass 
-            ref="lastPasswordRef"
-            name="password"
-            placeholder="..."
-            type="password"
-            label="Пароль (еще раз)"
-          }}}
-        </form>
+            {{{ControlledInput
+              labelClass=labelClass 
+              ref="lastPasswordRef"
+              name="password"
+              placeholder="..."
+              type="password"
+              label="Пароль (еще раз)"
+            }}}
+          </form>
 
-        <div class='navigate-page-block-sign-up'>
-            {{{SignButton onSubmit=onSubmit text="Зарегистрироваться"}}}
-            {{{AuxiliaryButton text="Войти"}}}
+          <div class='navigate-page-block-sign-up'>
+              {{{SignButton onSubmit=onSubmit text="Зарегистрироваться"}}}
+              {{{AuxiliaryButton text="Войти"}}}
+          </div>
         </div>
       </div>
-    </div>
-    `;
+    </main>`;
   }
 }

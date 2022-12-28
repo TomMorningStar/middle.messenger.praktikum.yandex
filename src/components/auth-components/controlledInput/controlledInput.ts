@@ -15,8 +15,11 @@ interface ControlledInputProps {
 export class ControlledInput extends Block {
   static componentName = 'ControlledInput';
   constructor(props: ControlledInputProps) {
-    super({
-      ...props,
+    super({...props});
+
+    // Вынес onBlur, если передать в events, то слушатель распространяется на весь компонент
+    // а объявить в authInput ее не могу, поскольку надо обновлять пропсы в AuthError(во внешнем компоненте)
+    this.setProps({
       onBlur: (e: FocusEvent) => {
         const inputEl = e.target as HTMLInputElement;
 
@@ -52,7 +55,7 @@ export class ControlledInput extends Block {
           this.refs.errorRef.setProps({ text: error.authLogin });
         }
 
-        if (error.mail && this.props.name === 'mail') {
+        if (error.mail && this.props.name === 'email') {
           this.refs.errorRef.setProps({ text: error.mail });
         }
 
@@ -64,7 +67,7 @@ export class ControlledInput extends Block {
           this.refs.errorRef.setProps({ text: error.firstName });
         }
 
-        if (error.lastName && this.props.name === 'last_name') {
+        if (error.lastName && this.props.name === 'second_name') {
           this.refs.errorRef.setProps({ text: error.lastName });
         }
 
@@ -75,16 +78,15 @@ export class ControlledInput extends Block {
         if (error.password && this.props.name === 'password') {
           this.refs.errorRef.setProps({ text: error.password });
         }
-      },
-    });
-
+      }
+    })
 
   }
 
   protected render(): string {
     return `
       <div class={{ControlledInputClass}}>
-        <div class={{labelClass}}>{{label}}</div>
+        <label class={{labelClass}}>{{label}}</label>
           {{{AuthInput 
             ref="input"
             name="{{name}}"

@@ -35,38 +35,40 @@ export class SignIn extends Block {
 
   render() {
     return `
-    <div class='authPage'>
-      <div class='authCart'>
-        <h3>Вход</h3>
+    <main>
+      <div class='authPage'>
+        <div class='authCart'>
+          <h3>Вход</h3>
 
-        {{{ControlledInput 
-          ref="loginInputRef"
-          onInput=onInput
-          onFocus=onFocus
-          name="auth-login"
-          placeholder="..."
-          type="text"
-          label="Логин"
-          labelClass=labelClass
-        }}}
+          {{{ControlledInput 
+            ref="loginInputRef"
+            onInput=onInput
+            onFocus=onFocus
+            name="login"
+            placeholder="..."
+            type="text"
+            label="Логин"
+            labelClass=labelClass
+          }}}
 
-        {{{ControlledInput 
-          ref="passwordInputRef"
-          onInput=onInput
-          onFocus=onFocus
-          name="auth-password"
-          placeholder="..."
-          type="password"
-          label="Пароль"
-          labelClass=labelClass
-        }}}
-    
-        <div class='navigate-page-block'>
-          {{{SignButton ref="signButtonEl" onSubmit=onSubmit text="Авторизоваться"}}}
-          {{{AuxiliaryButton text="Нет аккаунта?"}}}
+          {{{ControlledInput 
+            ref="passwordInputRef"
+            onInput=onInput
+            onFocus=onFocus
+            name="password"
+            placeholder="..."
+            type="password"
+            label="Пароль"
+            labelClass=labelClass
+          }}}
+      
+          <div class='navigate-page-block'>
+            {{{SignButton ref="signButtonEl" onSubmit=onSubmit text="Авторизоваться"}}}
+            {{{AuxiliaryButton text="Нет аккаунта?"}}}
+          </div>
         </div>
       </div>
-    </div>
+    </main>  
     `;
   }
 }
