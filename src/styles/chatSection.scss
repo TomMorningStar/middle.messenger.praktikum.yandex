@@ -10,12 +10,12 @@
     align-items: center;
     border-bottom: 1px solid #eaeaea;
     padding: 10px 0;
+    position: relative;
 
     .chat-dialog-info-img {
       margin-right: 10px;
       width: 34px;
       height: 34px;
-      background-color: #efefef;
       border-radius: 100%;
     }
 
@@ -36,32 +36,46 @@
   }
 
   .chat-section-messages-wrapper {
-    background-image: url('https://damion.club/uploads/posts/2022-09/1663963614_4-damion-club-p-temnii-fon-dlya-telegram-pinterest-6.jpg');
-    height: 93%;
+    height: calc(100vh - 54px);
     position: relative;
+    overflow-y: scroll;
 
-    h1 {
-      text-align: center;
-      color: #fff;
-      // font-size: 15px;
-      position: absolute;
-      top: 40%;
-      left: 45%;
+
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fbfbfb;
+      border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 5px solid transparent;
+      border-radius: 100px;
+      background-color: #3369f3;
+      background-clip: content-box;
     }
 
     .message-input-field {
-      width: 100%;
       border-top: 1px solid #eaeaea;
-      position: absolute;
-      bottom: 0;
+      align-items: center;
       padding: 10px 0;
       display: flex;
-      align-items: center;
+      position: absolute;
+      bottom: 0;
+      right: 0px;
+      left: 0px;
+      z-index: 1;
+      right: 0;
+      background-color: white;
 
       .inp-value-message {
+
+
         .select-file {
-          widows: 32px;
-          height: 32px;
+          width: 35px;
+          height: 35px;
         }
 
         svg {
@@ -72,7 +86,7 @@
         width: 100%;
 
         input {
-          min-width: 100%;
+          width: 100%;
           border-radius: 30px;
           border: none;
           background-color: #efefef;
@@ -83,12 +97,62 @@
     }
 
     .send-message-button {
-      widows: 32px;
+      padding: 0;
+      cursor: pointer;
+      border: none;
+      background-color: unset;
+      display: block;
+      width: 32px;
       height: 32px;
-      button {
-        vertical-align: middle;
-        border: none;
-        background-color: unset;
+    }
+
+    .message-time-data {
+      text-align: center;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .wiii {
+      width: calc(+30px);
+    }
+
+    .message-left {
+      max-width: 400px;
+      margin: 10px 0;
+
+      .time-margin {
+        margin-left: 94%;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      &__text-wrapper {
+        background-color: #f8f8f8;
+        display: inline-block;
+        position: relative;
+        padding: 11px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        margin-bottom: 10px;
+      }
+
+      &__text {
+        font-weight: 500;
+        color: #1e1e1e;
+        font-size: 12px;
+        max-width: 450px;
+      }
+
+      &__time {
+        right: 10px;
+        margin-left: 5px;
+        bottom: 9px;
+        font-size: 9px;
+        font-weight: 500;
+        color: #999;
       }
     }
   }

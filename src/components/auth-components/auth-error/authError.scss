@@ -1,0 +1,19 @@
+.error {
+  color: rgba(241, 18, 18, 0.8);
+  font-size: 12px;
+}
+
+.profile-error {
+  color: #f11212cc;
+  width: 190px;
+  justify-content: start;
+  font-size: 10px;
+  display: flex;
+  position: absolute;
+  left: 125px;
+  text-align: center;
+}
+
+.none {
+  display: none;
+}

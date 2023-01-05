@@ -1,0 +1,1 @@
+export { RootDialogues as default } from './rootDialogues';
