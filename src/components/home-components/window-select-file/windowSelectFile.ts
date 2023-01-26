@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 export class WindowSelectFile extends Block {
   static componentName = 'WindowSelectFile';

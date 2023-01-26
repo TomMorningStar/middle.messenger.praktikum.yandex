@@ -1,5 +1,7 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 import { dialogues} from '../../../datas/data'
+
+
 
 export class RootDialogues extends Block {
   static componentName = 'RootDialogues';

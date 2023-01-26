@@ -1,16 +1,16 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 interface ProfileButtonChangeDataProps {
   styles?: string,
   text?: string,
-  onChangeDatas?: () => void
+  onChangeData?: () => void
 }
 
 export class ProfileButtonChangeData extends Block {
   static componentName = 'ProfileButtonChangeData';
 
-  constructor({styles, text, onChangeDatas}: ProfileButtonChangeDataProps) {
-    super({styles, text, events: {click: onChangeDatas}});
+  constructor({styles, text, onChangeData}: ProfileButtonChangeDataProps) {
+    super({styles, text, events: {click: onChangeData}});
   }
 
   render() {

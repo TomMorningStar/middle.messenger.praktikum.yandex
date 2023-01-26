@@ -1,12 +1,19 @@
-import { Block } from 'utils';
+import { Block } from 'core';
+
+interface ChangeDataProps {
+  user: User
+}
 
 export class ChangeData extends Block {
   static componentName = 'ChangeData';
-  constructor({ changeDataItems }: any) {
-    super({ changeDataItems });
+  
+  constructor(props: ChangeDataProps) {
+    super(props);
   }
 
   render() {
+    const user: User = this.props.user;
+
     return `
     <div>
         <div class='profile-avatar name="avatar" cursor-pointer profile-avatar-change'>
@@ -27,29 +34,71 @@ export class ChangeData extends Block {
         </div>
         
         <div class='profile-info-block'>
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="email"
+            placeholder="${user.email}"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Почта"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
 
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="login"
+            placeholder="${user.login}"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Логин"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
 
-        ${
-          this.props.changeDataItems
-            ? this.props.changeDataItems
-                .map((item) => {
-                  return `{{{ControlledInput 
-                ref="${item.ref}"
-                type="${item.type}"
-                name="${item.name}"
-                placeholder="${item.placeholder}"
-                errorClass="${item.errorClass}"
-                labelClass="${item.labelClass}"
-                label="${item.label}"
-                ControlledInputClass="${item.ControlledInputClass}"
-            
-            }}}`;
-                })
-                .join('')
-            : ''
-        }
-        </div>
-    </div>
-    `;
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="first_name"
+            placeholder="${user.firstName}"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Имя"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
+
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="second_name"
+            placeholder="${user.secondName}"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Фамилия"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
+
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="display_name"
+            placeholder="${user.displayName ? `${user.displayName}` : "...." }"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Имя в чате"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
+
+          {{{ControlledInput 
+            ref="mailRef"
+            type="text"
+            name="phone"
+            placeholder="${user.phone}"
+            errorClass="profile-error"
+            labelClass="profile-key"
+            label="Телефон"
+            ControlledInputClass="profile-info-flex-block"
+          }}}
+        </div>`;
   }
 }

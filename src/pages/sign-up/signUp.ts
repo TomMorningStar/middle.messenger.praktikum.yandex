@@ -1,11 +1,14 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { Screens, withRouter, withStore } from 'utils';
+import { signUp } from 'services/auth';
+
 
 export class SignUp extends Block {
   static componentName = 'SignUp';
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.setProps({
       labelClass: 'info',
@@ -78,15 +81,37 @@ export class SignUp extends Block {
           });
         }
 
-        console.log({
-          mail: this.refs.mailRef.refs.input.element.value,
+        // const authData = {
+        //   mail: this.refs.mailRef.refs.input.element.value,
+        //   login: this.refs.loginInputRef.refs.input.element.value,
+        //   firstName: this.refs.firstNameRef.refs.input.element.value,
+        //   lastName: this.refs.lastNameRef.refs.input.element.value,
+        //   phone: this.refs.phoneRef.refs.input.element.value,
+        //   firstPassword: this.refs.firstPasswordRef.refs.input.element.value,
+        //   lastPassword: this.refs.lastPasswordRef.refs.input.element.value,
+        // }
+
+        const authData = {
+          first_name: this.refs.firstNameRef.refs.input.element.value,
+          second_name: this.refs.lastNameRef.refs.input.element.value,
           login: this.refs.loginInputRef.refs.input.element.value,
-          firstName: this.refs.firstNameRef.refs.input.element.value,
-          lastName: this.refs.lastNameRef.refs.input.element.value,
+          email: this.refs.mailRef.refs.input.element.value,
+          password: this.refs.firstPasswordRef.refs.input.element.value,
           phone: this.refs.phoneRef.refs.input.element.value,
-          firstPassword: this.refs.firstPasswordRef.refs.input.element.value,
-          lastPassword: this.refs.lastPasswordRef.refs.input.element.value,
-        });
+        }
+
+
+        this.props.store.dispatch(signUp, authData)
+
+        // console.log({
+        //   mail: this.refs.mailRef.refs.input.element.value,
+        //   login: this.refs.loginInputRef.refs.input.element.value,
+        //   firstName: this.refs.firstNameRef.refs.input.element.value,
+        //   lastName: this.refs.lastNameRef.refs.input.element.value,
+        //   phone: this.refs.phoneRef.refs.input.element.value,
+        //   firstPassword: this.refs.firstPasswordRef.refs.input.element.value,
+        //   lastPassword: this.refs.lastPasswordRef.refs.input.element.value,
+        // });
 
         if (
           !errorMessage.mail &&
@@ -96,11 +121,18 @@ export class SignUp extends Block {
           !errorMessage.phone &&
           !errorMessage.password
         ) {
-          window.location.href = './signIn';
+          // this.props.router.go('/');
+
+
+
           console.log('в будущем тут будет реализовата форма отрпавки');
         }
       },
     });
+  }
+
+  componentDidUpdate() {
+    return window.store.getState().screen === Screens.SignUp
   }
 
   render() {
@@ -185,3 +217,4 @@ export class SignUp extends Block {
     </main>`;
   }
 }
+export default withRouter(withStore(SignUp));

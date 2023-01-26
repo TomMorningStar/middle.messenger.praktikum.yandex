@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 import "./chatSection.scss";
 
@@ -11,7 +11,6 @@ export class ChatSection extends Block {
 
     this.setProps({
       openBurgerWindow: () => {
-        console.log('click');
         this.setProps({
           burgerWindow: !this.props.burgerWindow
         })

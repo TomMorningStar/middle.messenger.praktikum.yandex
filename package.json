@@ -9,10 +9,14 @@
     "start": "npm run build && node ./server.js"
   },
   "alias": {
+    "core": "./src/core",
     "utils": "./src/utils",
     "components": "./src/components",
     "helpers": "./src/helpers",
-    "pages": "./src/pages"
+    "store": "./src/store",
+    "pages": "./src/pages",
+    "api": "./src/api",
+    "services": "./src/services"
   },
   "author": "",
   "license": "ISC",

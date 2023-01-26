@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 export class DialogItem extends Block {
   static componentName = 'DialogItem';

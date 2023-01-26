@@ -1,22 +1,12 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 export class NavWrapper extends Block {
   static componentName = 'NavWrapper';
 
-  constructor() {
-    super();
-
-    this.setProps({
-      onClick() {
-        window.location.href = './profile'
-      },
-    });
-  }
-
   render() {
     return `
     <nav>
-        {{{ProfileLinkButton onClick=onClick}}}
+        {{{ProfileLinkButton}}}
         {{{SearchDialogComponent}}}
     </nav>
     `;

@@ -1,46 +1,21 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 import { validateForm, ValifateRuleType } from 'helpers/validateForm';
-import changeDataArray from '../../datas/changeDataItems';
+import { withUser, withStore, withRouter, Screens } from 'utils';
+import { logout } from 'services/auth';
 
-export class ProfilePage extends Block {
+
+class Profile extends Block {
   static componentName = 'ProfilePage';
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.setProps({
       profileData: true,
       changeData: false,
       changePassword: false,
-      title: 'Иван',
 
-      changeDataItems: changeDataArray,
-      data: [
-        {
-          key: 'Почта',
-          value: 'pochta@yandex.ru',
-        },
-        {
-          key: 'Логин',
-          value: 'ivanivanov',
-        },
-        {
-          key: 'Имя',
-          value: 'Иван',
-        },
-        {
-          key: 'Фамилия',
-          value: 'Иванов',
-        },
-        {
-          key: 'Имя в чате',
-          value: 'Иван',
-        },
-        {
-          key: 'Телефон',
-          value: '+7909967303011',
-        },
-      ],
+      onChangeData: () => this.openOnChangeDataPage(),
 
       onBackPage: () => {
         if (this.props.changeData || this.props.changePassword) {
@@ -50,7 +25,7 @@ export class ProfilePage extends Block {
             changePassword: false,
           });
         } else {
-          window.location.href = '/';
+          this.props.router.go('/')
         }
       },
 
@@ -107,120 +82,14 @@ export class ProfilePage extends Block {
               profileData: true,
               changeData: false,
               changePassword: false,
-
-              // это временный костыль для того чтобы можно было менять поля и видеть изменения в профиле
-              data: this.props.data.map((item) => {
-                if (item.key === 'Почта') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.mailRef.refs.input.element
-                      .value
-                      ? this.refs.changeData.refs.mailRef.refs.input.element
-                          .value
-                      : this.props.data[0].value,
-                  };
-                }
-
-                if (item.key === 'Логин') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.loginInputRef.refs.input
-                      .element.value
-                      ? this.refs.changeData.refs.loginInputRef.refs.input
-                          .element.value
-                      : this.props.data[1].value,
-                  };
-                }
-
-                if (item.key === 'Имя') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.firstNameRef.refs.input
-                      .element.value
-                      ? this.refs.changeData.refs.firstNameRef.refs.input
-                          .element.value
-                      : this.props.data[2].value,
-                  };
-                }
-
-                if (item.key === 'Фамилия') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.lastNameRef.refs.input
-                      .element.value
-                      ? this.refs.changeData.refs.lastNameRef.refs.input.element
-                          .value
-                      : this.props.data[3].value,
-                  };
-                }
-
-                if (item.key === 'Имя в чате') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.firstNameRef.refs.input
-                      .element.value
-                      ? this.refs.changeData.refs.firstNameRef.refs.input
-                          .element.value
-                      : this.props.data[4].value,
-                  };
-                }
-
-                if (item.key === 'Телефон') {
-                  return {
-                    ...item,
-                    value: this.refs.changeData.refs.phoneRef.refs.input.element
-                      .value
-                      ? this.refs.changeData.refs.phoneRef.refs.input.element
-                          .value
-                      : this.props.data[5].value,
-                  };
-                }
-
-                return { ...item };
-              }),
             });
           }
         }
       },
 
-      onChangeDatas: () => {
-        this.setProps({
-          profileData: false,
-          changeData: true,
-          changePassword: false,
-          // это временный костыль для того чтобы можно было менять поля и видеть изменения в placeholder в изменении данных пользователя
-          changeDataItems: this.props.changeDataItems.map((item) => {
-            if (item.label === 'Почта') {
-              return { ...item, placeholder: this.props.data[0].value };
-            }
-
-            if (item.label === 'Логин') {
-              return { ...item, placeholder: this.props.data[1].value };
-            }
-
-            if (item.label === 'Имя') {
-              return { ...item, placeholder: this.props.data[2].value };
-            }
-
-            if (item.label === 'Фамилия') {
-              return { ...item, placeholder: this.props.data[3].value };
-            }
-
-            if (item.label === 'Имя в чате') {
-              return { ...item, placeholder: this.props.data[4].value };
-            }
-
-            if (item.label === 'Телефон') {
-              return { ...item, placeholder: this.props.data[5].value };
-            }
-
-            return { ...item };
-          }),
-        });
-      },
-
       signOut: () => {
-        window.location.href = './signIn';
+        this.props.store.dispatch(logout)
+        this.props.router.go('/signIn');
       },
 
       onChangePasswordPage: () => {
@@ -241,54 +110,58 @@ export class ProfilePage extends Block {
           },
         ]);
 
-        if(!this.refs.changePassword.refs.oldPasswordInput.refs.input.element
-          .value) { 
-            this.refs.changePassword.refs.oldPasswordInput.refs.errorRef.setProps({
-              text: "Поле не может быть пустым"
-            })
-          }
+        if (!this.refs.changePassword.refs.oldPasswordInput.refs.input.element
+          .value) {
+          this.refs.changePassword.refs.oldPasswordInput.refs.errorRef.setProps({
+            text: "Поле не может быть пустым"
+          })
+        }
 
+        if (this.refs.changePassword.refs.newPasswordRef.refs.input.element
+          .value && this.refs.changePassword.refs.newPasswordRepeatRef.refs.input
+            .element.value &&
+          this.refs.changePassword.refs.newPasswordRef.refs.input.element
+            .value !==
+          this.refs.changePassword.refs.newPasswordRepeatRef.refs.input
+            .element.value
+        ) {
+          this.setProps({
+            error: 'Пароли не совпадают',
+          });
 
-
-
-
-              
-              if ( this.refs.changePassword.refs.newPasswordRef.refs.input.element
-                .value && this.refs.changePassword.refs.newPasswordRepeatRef.refs.input
-                .element.value &&
-                this.refs.changePassword.refs.newPasswordRef.refs.input.element
-                  .value !==
-                this.refs.changePassword.refs.newPasswordRepeatRef.refs.input
-                  .element.value
-              ) {
-                console.log("da");
-                this.setProps({
-                  error: 'Пароли не совпадают',
-                });
-    
-              } 
-              // else {
-              //   this.setProps({
-              //     profileData: true,
-              //     changeData: false,
-              //     changePassword: false,
-              //   });
-              // }
-   
-          
-
-
- 
-        
-    
+        }
       },
+    });
+
+
+
+
+  }
+
+
+  openOnChangeDataPage() {
+    this.setProps({
+      profileData: false,
+      changeData: true,
+      changePassword: false,
     });
   }
 
+
+
+  componentDidUpdate() {
+    return window.store.getState().screen === Screens.Profile
+  }
+
+
   render() {
+    const user: User = this.props.store.getState().user;
+
+    console.log(this.props);
+    
+    
     return `
-    <main>
-      <div class='profle-page-wrapper'>
+    <main class='profle-page-wrapper'>
           {{{BackLink onBackPage=onBackPage}}}
           <div class='info-profile-wrapper-block'>
               <div class='profile-avatar'>
@@ -301,15 +174,13 @@ export class ProfilePage extends Block {
                   ></path>
               </svg>
           </div>
-
   
           {{#if profileData}}
               {{{ProfileData 
-                data=data
-                title=title
+                user=user
                 ref="profileData"
               }}}
-                {{{ProfileButtonChangeData onChangeDatas=onChangeDatas text="Изменить данные" styles="change-data cursor-pointer no-styles"}}}
+                {{{ProfileButtonChangeData onChangeData=onChangeData text="Изменить данные" styles="change-data cursor-pointer no-styles"}}}
                 {{{ProfileButtonPasswordData onChangePassword=onChangePasswordPage text="Изменить пароль" styles="change-data cursor-pointer no-styles"}}}
                 {{{ProfileButtonSignOut signOut=signOut text="Выйти" styles="exit-in-profile-button cursor-pointer no-styles"}}}
           {{/if}}
@@ -317,28 +188,26 @@ export class ProfilePage extends Block {
           {{#if changeData}}
                 <div class='profle-page-wrapper'>
                   <div class='info-profile-wrapper-block'>
-                    {{{ChangeData ref="changeData" changeDataItems=changeDataItems}}}
+                    {{{ChangeData ref="changeData" user=user}}}
                     {{{ProfileButton ref="onSaveData" onClick=onClick}}}
                   </div>
                 </div>
           {{/if}}
 
           {{#if changePassword}}
-
-          <div class='profle-page-wrapper'>
-            <div class='info-profile-wrapper-block'>
-              {{{ChangePassword ref="changePassword" error=error}}}
-              {{{ProfileButton ref="onSaveData" onChangePassword=onChangePassword}}}
+            <div class='profle-page-wrapper'>
+              <div class='info-profile-wrapper-block'>
+                {{{ChangePassword ref="changePassword" error=error}}}
+                {{{ProfileButton ref="onSaveData" onChangePassword=onChangePassword}}}
+              </div>
             </div>
-          </div>
-
-
-
           {{/if}}
           
           </div>
-      </div>
-    </main>
-    `;
+    </main>`;
   }
 }
+
+
+export default withRouter(withStore(withUser(Profile)));
+

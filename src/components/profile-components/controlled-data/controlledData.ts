@@ -1,4 +1,4 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 
 export class ControlledData extends Block {
   static componentName = 'ControlledData';

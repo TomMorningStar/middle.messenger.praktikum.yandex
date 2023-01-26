@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 export class SendMessageButton extends Block {
   static componentName = 'SendMessageButton';

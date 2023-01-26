@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 type DailoguesPropsArray = {
   dialogues: DailoguesProps;

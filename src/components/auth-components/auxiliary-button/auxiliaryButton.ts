@@ -1,20 +1,29 @@
-import { Block } from 'utils';
+import { Block, CoreRouter } from 'core';
+import { withRouter } from 'utils';
 
-export class AuxiliaryButton extends Block {
+interface AuxiliaryButtonProps {
+  router: CoreRouter;
+  text: string;
+  events: {
+    click: () => void;
+  }
+}
+
+class AuxiliaryButton extends Block {
   static componentName = 'AuxiliaryButton';
 
-  constructor({ text }: string) {
+  constructor({...props}: AuxiliaryButtonProps) {
     super({
-        text,
-        events: {
-            click: () => {
-              if(text === "Войти") {
-                window.location.href = './signIn'
-              } else {
-                window.location.href = "./signUp"
-              }
-            }
+      ...props,
+      events: {
+        click: () => {
+          if (this.props.text === "Войти") {
+            this.props.router.go('/signIn')
+          } else {
+            this.props.router.go('/signUp')
+          }
         }
+      }
     });
   }
 
@@ -25,3 +34,7 @@ export class AuxiliaryButton extends Block {
     </div>`;
   }
 }
+
+const Button = withRouter(AuxiliaryButton);
+
+export { Button as AuxiliaryButton };
