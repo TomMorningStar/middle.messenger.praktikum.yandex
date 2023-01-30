@@ -21,20 +21,71 @@
     display: flex;
 
     &:hover {
-      color: #3369f3;
+      color: #3f99ff;
     }
   }
 
   .icon {
     width: 23px;
     height: 23px;
-    border: 2px solid #3369f3;
+    border: 2px solid #3f99ff;
     border-radius: 100%;
     text-align: center;
     line-height: 18px;
     font-size: 14px;
-    color: #3369f3;
+    color: #3f99ff;
     font-weight: bold;
     margin-right: 15px;
   }
+
+
+  .user-action-window {
+
+    label {
+      cursor: pointer;
+      height: 25px;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 12px;
+      display: flex;
+    }
+
+    input {
+      background-color: unset;
+      width: 100%;
+      color: #1e1e1e;
+      border: none;
+      border-bottom: 1px solid #3f99ff;
+      outline: none;
+      margin-bottom: 10px;
+      font-size: 15px;
+
+      &::placeholder {
+        font-weight: bold;
+        opacity: 0.5;
+      }
+    }
+
+    .title {
+      text-align: center;
+      margin: 0 0 50px 0;
+      padding: 0;
+    }
+
+    .action-button {
+      background-color: #3f99ff;
+      width: 280px;
+      height: 37px;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 33px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
 }

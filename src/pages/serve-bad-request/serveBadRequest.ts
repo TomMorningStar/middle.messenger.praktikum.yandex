@@ -1,5 +1,5 @@
 import { Block } from 'core';
-import { withIsLoading, withRouter, withStore } from 'utils';
+import { withRouter, withStore } from 'utils';
 
 
 export class ServerBadRequest extends Block {
@@ -21,4 +21,4 @@ export class ServerBadRequest extends Block {
   }
 }
 
-export default withRouter(withStore(withIsLoading(ServerBadRequest)));
+export default withRouter(withStore(ServerBadRequest));

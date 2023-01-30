@@ -1,44 +1,35 @@
-import { Block } from 'core';
-
-type DailoguesPropsArray = {
-  dialogues: DailoguesProps;
-};
+import { ChatInfo } from 'api/chat';
+import { Block, Store } from 'core';
+import { withStore } from 'utils';
 
 interface DailoguesProps {
-  nickName: string;
-  time: string;
-  messageText: string;
-  messageNotification: number;
-  avatar: string;
+  dialogues: ChatInfo[];
+  store: Store<AppState>;
 }
-
-export class Dialogues extends Block {
+class Dialogues extends Block {
   static componentName = 'Dialogues';
 
-  constructor({ dialogues }: DailoguesPropsArray) {
-    super({ dialogues });
+  constructor(props: DailoguesProps) {
+    super(props);
   }
 
   render() {
     return `
     <div class='dialogues'>
-      ${
-        this.props.dialogues
-          ? this.props.dialogues
-              .map((item) => {
-                return `{{{DialogItem 
-                  nickName="${item.nickName}"
-                  time="${item.time}" 
-                  messageText="${item.messageText}"
-                  messageNotification="${
-                    item.messageNotification ? item.messageNotification : ''
-                  }"
-                  avatar="${item.avatar}"
-                }}}`;
-              })
-              .join('')
-          : ''
-      } 
+      ${window.store.getState().chats
+        .map((item: ChatInfo) => {
+          return `{{{DialogItem 
+              id="${item.id}"
+              store=store
+              nickName="${item.title}"
+              messageNotification="${item.unread_count === 0 ? "" : item.unread_count}"
+            }}}`;
+        })
+        .join('')} 
     </div>`;
   }
 }
+
+const UpdateDialogues = withStore(Dialogues);
+
+export { UpdateDialogues as Dialogues };

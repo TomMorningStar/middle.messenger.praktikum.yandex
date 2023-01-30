@@ -55,17 +55,17 @@ export class HTTPTransport {
   private request<Response>(url: string, options: Options = {method: METHODS.GET}): Promise<Response> {
     const {method, data} = options;
 
+    
+
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status < 400) {
+
             resolve(xhr.response);
-          } else {
-            reject(xhr.response);
-          }
+
         }
       };
 
@@ -73,19 +73,29 @@ export class HTTPTransport {
       xhr.onerror = () => reject({reason: 'network error'});
       xhr.ontimeout = () => reject({reason: 'timeout'});
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
+      data instanceof FormData ? "" :xhr.setRequestHeader('Content-Type', 'application/json')
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if(data instanceof FormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }
     });
   }
 }
+
+
+
+
+
+
+
+
 
 
 

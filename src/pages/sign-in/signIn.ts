@@ -9,6 +9,7 @@ type SignInPageProps = {
   labelClass: string;
   onSubmit?: () => void;
   onToggleAppLoading?: () => void;
+  formError?: () => string | null;
 };
 
 
@@ -19,7 +20,9 @@ export class SignIn extends Block<SignInPageProps> {
     super(props);
 
     this.setProps({
+      formError: () => this.props.store.getState().loginFormError,
       labelClass: "info",
+      
       onSubmit: () => {
         const errorMessage = validateForm([
           { type: ValifateRuleType.AuthLogin, value: this.refs.loginInputRef.refs.input.element.value },
@@ -32,14 +35,12 @@ export class SignIn extends Block<SignInPageProps> {
         }
 
         this.refs.passwordInputRef.refs.errorRef.setProps({
-          text: 'Неверный логин или пароль'
+          text: window.store.getState().loginFormError
         })
 
         if (!errorMessage.authLogin && !errorMessage.authPassword) {
           this.props.router.go('/')
           this.props.store.dispatch(login, loginValue)
-
-          console.log('в будущем тут будет реализовата форма отрпавки')
         }
       },
     });
@@ -50,6 +51,7 @@ export class SignIn extends Block<SignInPageProps> {
   }
 
   render() {
+
     return `
       <main>
         <div class='authPage'>
@@ -79,6 +81,8 @@ export class SignIn extends Block<SignInPageProps> {
               labelClass=labelClass
                 signIn=${true}
             }}}
+
+            <div class="error">{{#if formError}}{{formError}}{{/if}}</div>
         
             <div class='navigate-page-block'>
               {{{SignButton ref="signButtonEl" onSubmit=onSubmit text="Авторизоваться"}}}

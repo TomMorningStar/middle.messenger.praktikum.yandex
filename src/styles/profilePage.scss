@@ -35,8 +35,9 @@
     transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
-    .profile-avatar {
-      background-color: #efefef;
+
+    .profile-avatar,
+    .profile-avatar-change-data {
       width: 130px;
       height: 130px;
       border-radius: 100%;
@@ -44,13 +45,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background-size: cover;
     }
 
-    .profile-avatar-change {
+    .profile-avatar {
+      background-image: url(https://cdn-icons-png.flaticon.com/512/3293/3293466.png);
+
+
+    }
+
+    .profile-avatar-change-data {
+      background-image: url(https://cdn-icons-png.flaticon.com/512/3293/3293466.png);
+
       &:hover {
-        background: #000;
-        opacity: 0.5;
+        opacity: 0.8;
       }
+    }
+
+    input[type="file"] {
+      cursor: pointer;
+      border-radius: 100%;
+      width: 130px;
+      height: 130px;
+      opacity: 0;
     }
   }
 
@@ -99,10 +116,33 @@
   .save-data-button {
     padding: 10px 0;
     display: block;
-    background-color: #3369f3;
+    background-color: #3f99ff;
     color: #fff;
     width: 70%;
     margin: auto;
     border-radius: 8px;
+  }
+}
+
+.user-action-window {
+  position: fixed;
+  width: 100vmax;
+  height: 100vmax;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:rgba(0, 0, 0, 0.5);
+  
+
+  .user-action-window-content {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 50px 30px 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 6px #3a3a3a24;
+
   }
 }

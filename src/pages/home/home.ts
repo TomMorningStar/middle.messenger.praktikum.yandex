@@ -1,17 +1,8 @@
-import { Block, PathRouter, Store } from 'core';
-import { Screens, withRouter, withStore, withUser } from 'utils';
-
-type HomePageProps = {
-  router: PathRouter;
-  store: Store<AppState>;
-  user: User | null;
-};
+import { Block } from 'core';
+import { Screens } from 'utils';
 
 export class HomePage extends Block {
   static componentName = 'HomePage';
-  constructor(props: HomePageProps) {
-    super(props)
-  }
 
   componentDidUpdate() {
     return window.store.getState().screen === Screens.Home
@@ -25,5 +16,8 @@ export class HomePage extends Block {
         </main>`;
   }
 }
+export default HomePage;
 
-export default withRouter(withStore(withUser(HomePage)));
+
+
+

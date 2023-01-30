@@ -1,4 +1,4 @@
-import { renderDOM, registerComponent, PathRouter, CoreRouter, Store } from 'core';
+import { registerComponent, PathRouter, CoreRouter, Store } from 'core';
 import { initApp } from './src/services/initApp';
 import { defaultState } from './src/store';
 import { initRouter } from './src/router';
@@ -16,8 +16,6 @@ declare global {
   }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const store = new Store<AppState>(defaultState);
@@ -29,5 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initRouter(router, store);
 
   store.dispatch(initApp);
+
+  store.on('changed', (prevState, nextState) => {
+
+      console.log(
+        '%cstore updated',
+        'background: #222; color: #bada55',
+        nextState,
+      );
+    
+  });
 });
+
+
 

@@ -1,1 +1,0 @@
-export { ProfileButtonSignOut as default} from './profileButtonSignOut';

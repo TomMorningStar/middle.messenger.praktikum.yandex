@@ -22,7 +22,7 @@ export class BackLink extends Block {
                     cy='14'
                     r='14'
                     transform='rotate(-180 14 14)'
-                    fill='#3369F3'
+                    fill='#3f99ff'
                 ></circle>
                 <rect
                     x='20'

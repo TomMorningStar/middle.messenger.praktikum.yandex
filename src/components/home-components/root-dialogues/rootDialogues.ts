@@ -1,24 +1,14 @@
 import { Block } from 'core';
-import { dialogues} from '../../../datas/data'
-
 
 
 export class RootDialogues extends Block {
   static componentName = 'RootDialogues';
 
-  constructor() {
-    super()
-
-    this.setProps({
-      dialogues,
-    })
-  }
-
   render() {
     return `
     <div class='root-dialogues'>
             {{{NavWrapper}}}
-            {{{Dialogues dialogues=dialogues}}}
+            {{{Dialogues}}}
     </div>
     `;
   }

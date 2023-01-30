@@ -8,6 +8,7 @@ export enum ValifateRuleType {
   Phone = 'phone',
   Password = 'password',
   NameInChat = 'first-name'
+  DisplayName = 'display-name'
 }
 
 type ValidateRule = {
@@ -24,6 +25,7 @@ export function validateForm(rules: ValidateRule[]) {
   let lastName = '';
   let phone = '';
   let password = '';
+  let displayName = '';
 
   for (let i = 0; i < rules.length; i++) {
     const { type, value } = rules[i];
@@ -32,7 +34,7 @@ export function validateForm(rules: ValidateRule[]) {
       if (value.length === 0) {
         authLogin = 'Поле не может быть пустым';
       } else if (value.length < 4) {
-        authLogin = 'Логин не может быть меньше 4 символов';
+        authLogin = 'Поле не может быть меньше 4 символов';
       }
     }
 
@@ -59,18 +61,37 @@ export function validateForm(rules: ValidateRule[]) {
       if (value.length === 0) {
         login = 'Поле не может быть пустым';
       } else if (value.length < 4 || value.length > 20) {
-        login = 'В логине должно быть от 4 до 20 символов';
+        login = 'Должно быть от 4 до 20 символов';
       } else if (/^[-a-zA-Z1-9_]+$/.test(value) === false) {
         login =
           'Только латиница и допустимые символы -_';
       }
 
       if (value.includes(' ')) {
-        login = 'Логин не может содержать пробел';
+        login = 'Поле не может содержать пробел';
       }
 
       if (/^[1-9]+$/.test(value) && !/^[a-zA-Z1]+$/.test(value)) {
-        login = 'Логин не может состоять только из цифр';
+        login = 'Поле не может состоять только из цифр';
+      }
+    }
+
+    if (type === ValifateRuleType.DisplayName) {
+      if (value.length === 0) {
+        displayName = 'Поле не может быть пустым';
+      } else if (value.length < 4 || value.length > 20) {
+        displayName = 'Должно быть от 4 до 20 символов';
+      } else if (/^[-a-zA-Z1-9_]+$/.test(value) === false) {
+        displayName =
+          'Только латиница и допустимые символы -_';
+      }
+
+      if (value.includes(' ')) {
+        displayName = 'Поле не может содержать пробел';
+      }
+
+      if (/^[1-9]+$/.test(value) && !/^[a-zA-Z1]+$/.test(value)) {
+        displayName = 'Поле не может состоять только из цифр';
       }
     }
 
@@ -139,5 +160,5 @@ export function validateForm(rules: ValidateRule[]) {
 
   
 
-  return { authPassword, authLogin, mail, login, firstName, lastName, phone, password };
+  return { authPassword, authLogin, mail, login, firstName, lastName, phone, password, displayName };
 }

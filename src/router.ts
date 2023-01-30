@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/profile',
     block: Screens.Profile,
-    shouldAuthorized: false,
+    shouldAuthorized: true,
   },
   {
     path: '/signIn',
@@ -17,49 +17,40 @@ const routes = [
   {
     path: '/signUp',
     block: Screens.SignUp,
-    shouldAuthorized: true,
+    shouldAuthorized: false,
   },
   {
     path: '*',
     block: Screens.Home,
-    shouldAuthorized: false,
+    shouldAuthorized: true,
   },
 ];
-
-
 
 
 export function initRouter(router: CoreRouter, store: Store<AppState>) {
   routes.forEach(route => {
     router.use(route.path, () => {
       const isAuthorized = Boolean(store.getState().user);
-      const currentScreen = Boolean(store.getState().screen);
-
-      store.dispatch({ screen: route.block })
-      // console.log(store.dispatch({ screen: route.block }));
-      
-      
-      // if (isAuthorized || !route.shouldAuthorized) {
-      //   store.dispatch({ screen: route.block });
-      //   return;
-      // }
-
-      // if (!currentScreen) {
-      //   store.dispatch({ screen: Screens.Home });
-      // }
+      if (isAuthorized || !route.shouldAuthorized) {
+        store.dispatch({ screen: route.block });
+        return;
+      } else {
+        window.router.go('/signIn')
+        store.dispatch({ screen: Screens.SignIn });
+      }
     });
   });
 
-  /**
-   * Глобальный слушатель изменений в сторе
-   * для переключения активного экрана
-   */
   store.on('changed', (prevState, nextState) => {
     if (!prevState.appIsInited && nextState.appIsInited) {
       router.start();
     }
     
     if (prevState.screen !== nextState.screen) {
+
+      console.log();
+      
+
       const Page = getScreenComponent(nextState.screen);
       renderDOM(new Page({}));
       document.title = `App / ${Page.componentName}`;

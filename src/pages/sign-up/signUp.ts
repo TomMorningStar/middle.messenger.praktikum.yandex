@@ -1,18 +1,25 @@
-import { Block } from 'core';
+import { Block, CoreRouter, Store } from 'core';
 import { validateForm, ValifateRuleType } from 'helpers/validateForm';
 import { Screens, withRouter, withStore } from 'utils';
 import { signUp } from 'services/auth';
 
+type SignUpPageProps = {
+  router: CoreRouter;
+  store: Store<AppState>;
+  labelClass: string;
+  onSubmit?: () => void;
+};
 
 export class SignUp extends Block {
   static componentName = 'SignUp';
 
-  constructor(props) {
+  constructor(props: SignUpPageProps) {
     super(props);
 
     this.setProps({
       labelClass: 'info',
       onSubmit: () => {
+
         const errorMessage = validateForm([
           {
             type: ValifateRuleType.Mail,
@@ -72,25 +79,6 @@ export class SignUp extends Block {
           text: errorMessage.password,
         });
 
-        if (
-          this.refs.firstPasswordRef.refs.input.element.value !==
-          this.refs.lastPasswordRef.refs.input.element.value
-        ) {
-          this.refs.lastPasswordRef.refs.errorRef.setProps({
-            text: 'Пароли не совпадают',
-          });
-        }
-
-        // const authData = {
-        //   mail: this.refs.mailRef.refs.input.element.value,
-        //   login: this.refs.loginInputRef.refs.input.element.value,
-        //   firstName: this.refs.firstNameRef.refs.input.element.value,
-        //   lastName: this.refs.lastNameRef.refs.input.element.value,
-        //   phone: this.refs.phoneRef.refs.input.element.value,
-        //   firstPassword: this.refs.firstPasswordRef.refs.input.element.value,
-        //   lastPassword: this.refs.lastPasswordRef.refs.input.element.value,
-        // }
-
         const authData = {
           first_name: this.refs.firstNameRef.refs.input.element.value,
           second_name: this.refs.lastNameRef.refs.input.element.value,
@@ -101,17 +89,6 @@ export class SignUp extends Block {
         }
 
 
-        this.props.store.dispatch(signUp, authData)
-
-        // console.log({
-        //   mail: this.refs.mailRef.refs.input.element.value,
-        //   login: this.refs.loginInputRef.refs.input.element.value,
-        //   firstName: this.refs.firstNameRef.refs.input.element.value,
-        //   lastName: this.refs.lastNameRef.refs.input.element.value,
-        //   phone: this.refs.phoneRef.refs.input.element.value,
-        //   firstPassword: this.refs.firstPasswordRef.refs.input.element.value,
-        //   lastPassword: this.refs.lastPasswordRef.refs.input.element.value,
-        // });
 
         if (
           !errorMessage.mail &&
@@ -121,11 +98,18 @@ export class SignUp extends Block {
           !errorMessage.phone &&
           !errorMessage.password
         ) {
-          // this.props.router.go('/');
 
+          if (
+            this.refs.firstPasswordRef.refs.input.element.value !==
+            this.refs.lastPasswordRef.refs.input.element.value
+          ) {
+            this.refs.lastPasswordRef.refs.errorRef.setProps({
+              text: 'Пароли не совпадают',
+            });
+          } else {
+            this.props.store.dispatch(signUp, authData)
+          }
 
-
-          console.log('в будущем тут будет реализовата форма отрпавки');
         }
       },
     });

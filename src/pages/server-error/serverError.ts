@@ -1,5 +1,5 @@
 import { Block } from 'core';
-import { withIsLoading, withRouter, withStore } from 'utils';
+import { withRouter, withStore } from 'utils';
 
 
 export class ServerError extends Block {
@@ -20,4 +20,4 @@ export class ServerError extends Block {
     `;
   }
 }
-export default withRouter(withStore(withIsLoading(ServerError)));
+export default withRouter(withStore(ServerError));

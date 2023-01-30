@@ -23,9 +23,11 @@ export const authAPI = {
 
   me: () => new HTTPTransport('/auth/').get<UserDTO | APIError>('user'),
 
-  auth: (data: SignupRequestData) => new HTTPTransport('/auth/').post('signup', data),
+  signUp: (data: SignupRequestData) => new HTTPTransport('/auth/').post('signup', data),
 
   logout: () => new HTTPTransport('/auth/').post('logout'),
+
+
 };
 
 
