@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block } from 'core';
 
 export class SendMessageButton extends Block {
   static componentName = 'SendMessageButton';
@@ -17,7 +17,7 @@ export class SendMessageButton extends Block {
         viewBox='0 0 28 28'
         fill='none'
       >
-        <circle cx='14' cy='14' r='14' fill='#3369F3'></circle>
+        <circle cx='14' cy='14' r='14' fill='#3f99ff'></circle>
         <rect x='8' y='13.2' width='11' height='1.6' fill='white'></rect>
         <path
           d='M15 9L19 14L15 19'

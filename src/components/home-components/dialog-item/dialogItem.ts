@@ -1,7 +1,29 @@
-import { Block } from 'utils';
+import { Block, Store } from 'core';
+import { createChatRoom } from 'services/messages';
+
+interface DialogItemProps {
+  id: string;
+  messageNotification: number;
+  nickName: string;
+  store: Store<AppState>;
+  events?: {
+    click?: () => void
+  };
+}
 
 export class DialogItem extends Block {
   static componentName = 'DialogItem';
+
+  constructor({ store, id, nickName, messageNotification }: DialogItemProps) {
+    super({
+      store, id, nickName, messageNotification, events: {
+        click: () => {
+          this.props.store.dispatch(createChatRoom, this.props.id);
+
+        }
+      }
+    });
+  }
 
   render() {
     return `
@@ -9,28 +31,20 @@ export class DialogItem extends Block {
             <div>
               <img
                   class='item-img'
-                  src='{{avatar}}'
+                  src='https://cdn-icons-png.flaticon.com/512/924/924915.png'
                   alt='avatar'
               />
             </div>
-            <div class='item-info-wrappper'>
-              <div class='item-info'>
-                  <div class='item-nickName'>{{nickName}}</div>
-                  <div class='time'>{{time}}</div>
-              </div>
-            <div class='item-info'>
-                <div class='item-text'>
-                  {{messageText}}
-                </div>
 
-                {{#if messageNotification}}
-                    <div class='item-amount-messages'>
-                    {{messageNotification}}
-                  </div>
-                {{/if}}
+            <div class='item-nickName'>{{nickName}}</div>
 
+          {{#if messageNotification}}
+            <div class='item-amount-messages'>
+              {{messageNotification}}
             </div>
-            </div>
+          {{/if}}
+
+       
         </div>`;
   }
 }

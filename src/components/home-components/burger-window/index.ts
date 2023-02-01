@@ -1,1 +1,1 @@
-export { BurgerWindow as default } from './burgerWindow';
+export { BurgerWindow as default} from './burgerWindow';

@@ -1,3 +1,8 @@
-export { default as Block } from './Block';
-export { default as registerComponent } from './registerComponent';
-export { default as renderDOM } from './renderDOM';
+export { mergeDeep } from './mergeDeep';
+export { diffObjectsDeep } from './diffObjectsDeep';
+export { withStore } from './withStore';
+export { withUser } from './withUser';
+export { withRouter } from './withRouter';
+export { Screens, getScreenComponent } from './screenList';
+export { transformUser } from './apiTransformers';
+export { hasError as apiHasError } from './apiHasError';

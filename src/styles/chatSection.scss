@@ -37,9 +37,7 @@
 
   .chat-section-messages-wrapper {
     height: calc(100vh - 54px);
-    position: relative;
     overflow-y: scroll;
-
 
     &::-webkit-scrollbar {
       width: 14px;
@@ -53,7 +51,7 @@
     &::-webkit-scrollbar-thumb {
       border: 5px solid transparent;
       border-radius: 100px;
-      background-color: #3369f3;
+      background-color: #3f99ff;
       background-clip: content-box;
     }
 
@@ -120,18 +118,10 @@
       max-width: 400px;
       margin: 10px 0;
 
-      .time-margin {
-        margin-left: 94%;
-      }
-
-      p {
-        margin: 0;
-      }
-
       &__text-wrapper {
-        background-color: #f8f8f8;
-        display: inline-block;
-        position: relative;
+        background-color: #eaeaea;
+        width: 250px;
+        
         padding: 11px;
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
@@ -145,15 +135,32 @@
         font-size: 12px;
         max-width: 450px;
       }
+    }
 
-      &__time {
-        right: 10px;
-        margin-left: 5px;
-        bottom: 9px;
-        font-size: 9px;
-        font-weight: 500;
-        color: #999;
+    .message-right {
+      justify-content: right;
+
+      &__text-wrapper {
+        background-color: #d1e2ff;
+        max-width: 250px;
+        margin-left: auto;
+        padding: 11px;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        margin-bottom: 10px;
       }
+
+      &__text {
+        font-weight: 500;
+        color: #df1919;
+        font-size: 12px;
+        max-width: 450px;
+      }
+
     }
   }
+
+
+
 }

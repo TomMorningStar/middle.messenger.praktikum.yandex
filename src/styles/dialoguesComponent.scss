@@ -58,13 +58,15 @@
     &::-webkit-scrollbar-thumb {
       border: 5px solid transparent;
       border-radius: 100px;
-      background-color: #3369f3;
+      background-color: #3f99ff;
       background-clip: content-box;
     }
 
     .dialog-item {
+      width: 180px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 12px 10px;
       border-bottom: 1px solid #eaeaea;
       cursor: pointer;
@@ -73,60 +75,33 @@
         background-color: #e4edfd;
         transition: 0.3s;
       }
-    }
 
-    .item-img {
-      width: 47px;
-      height: 47px;
-
-      border-radius: 100%;
-    }
-
-    .item-info-wrappper {
-      margin-left: 12px;
-
-      .item-info {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-
-        .time {
-          color: #999;
-          font-size: 9px;
-        }
+      .item-img {
+        width: 47px;
+        height: 47px;
+        border-radius: 100%;
       }
 
       .item-nickName {
         color: #1e1e1e;
         font-size: 12px;
         font-weight: 600;
-        margin-bottom: 4px;
-      }
-
-      .item-text {
-        font-size: 12px;
-        color: #999;
-      }
-
-      .item-nickName,
-      .item-text {
-        width: 193px;
-        margin-right: 4px;
+        margin-left: 5px;
       }
 
       .item-amount-messages {
-        position: absolute;
-        right: 1;
-        top: 10;
         width: 20px;
         height: 20px;
         line-height: 20px;
         border-radius: 100%;
         color: #fff;
-        background-color: #3369f3;
+        background-color: #3f99ff;
         text-align: center;
         font-size: 11px;
       }
     }
+
+
+
   }
 }

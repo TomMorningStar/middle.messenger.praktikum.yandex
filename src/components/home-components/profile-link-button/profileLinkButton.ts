@@ -1,17 +1,18 @@
-import { Block } from 'utils';
+import { Block, CoreRouter, Store } from 'core';
+import { withRouter } from 'utils';
 
 interface ProfileLinkButtonProps {
-  onClick: () => void;
+  router: CoreRouter;
+  events: {
+    click: () => void
+  }
 }
 
-export class ProfileLinkButton extends Block {
+ class ProfileLinkButton extends Block {
   static componentName = 'ProfileLinkButton';
 
-  constructor({onClick}: ProfileLinkButtonProps) {
-    super({ events: {click: onClick}})
-
-    
-
+  constructor(props: ProfileLinkButtonProps) {
+    super({...props, events: {click: () => this.props.router.go('/profile')}})
   }
 
   render() {
@@ -30,3 +31,7 @@ export class ProfileLinkButton extends Block {
     </div>`;
   }
 }
+
+const Button = withRouter(ProfileLinkButton);
+
+export { Button as ProfileLinkButton };

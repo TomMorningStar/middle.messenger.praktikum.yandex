@@ -1,12 +1,14 @@
-import { Block } from 'utils';
+import { Block } from 'core';
+import { sendMessage } from 'services/messages';
+import { withStore } from 'utils';
 
 import './styles.scss';
 
-export class MessageInputField extends Block {
+class MessageInputField extends Block {
   static componentName = 'MessageInputField';
 
-  constructor({ emptyText }: Record<string, string>) {
-    super({ emptyText });
+  constructor({ emptyText, store }: Record<string, string>) {
+    super({ emptyText, store });
 
     this.setProps({
       send: () => {
@@ -19,6 +21,8 @@ export class MessageInputField extends Block {
             error: 'error-message-field',
           });
         } else {
+          this.props.store.dispatch(sendMessage, this.props.emptyText);
+
           this.setProps({
             error: '',
           });
@@ -50,3 +54,8 @@ export class MessageInputField extends Block {
     </div>`;
   }
 }
+
+
+const UpdateMessageInputField = withStore(MessageInputField);
+
+export { UpdateMessageInputField as MessageInputField };

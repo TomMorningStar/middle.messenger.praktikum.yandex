@@ -1,17 +1,23 @@
-import { Block } from 'utils';
+import { Block, Store } from 'core';
+import { withStore } from 'utils';
 
 import "./chatSection.scss";
 
-export class ChatSection extends Block {
+interface ChatSectionProps {
+  store: Store<AppState>;
+  burgerWindow: boolean;
+}
+
+class ChatSection extends Block {
 
   static componentName = 'ChatSection';
 
-  constructor() {
-    super()
+  constructor(props: ChatSectionProps) {
+    super(props)
 
     this.setProps({
+      selectChat: () => this.props.store.getState().selectChat,
       openBurgerWindow: () => {
-        console.log('click');
         this.setProps({
           burgerWindow: !this.props.burgerWindow
         })
@@ -20,54 +26,46 @@ export class ChatSection extends Block {
   }
 
   render() {
+    const userId = this.props.store.getState().user.id;
+
     return `
       <div class='chat-section'>
         <div class='chat-dialog-info'>
           <div class='flex'>
               <img class='chat-dialog-info-img' src="https://cdn-icons-png.flaticon.com/512/924/924915.png" alt="автар" />
-
            <div class='chat-dialog-info-nickname'>Андрей</div>
-
          </div>
       {{{Burger openBurgerWindow=openBurgerWindow}}}
-
 
       {{#if burgerWindow}}
         {{{BurgerWindow}}}
       {{/if}}
-
-
       </div>
 
-    <div class='chat-section-messages-wrapper'>
-      {{{MessageInputField}}}
-
-      <h4 class='message-time-data'>19 июня</h4>
-
-      <div id='message' class='message-left'>
-        <div class='message-left__text-wrapper'>
-          <div class='message-left__text'>Lorem ipsum dolor sit, amet
-            consectetur adipisicing elit. Dolore dolor deserunt cum facilis
-            ipsum dignissimos iure explicabo repellat rem vero?
-
-            <span id='time-margin' class='message-left__time'>
-              11:56
-            </span></div>
-        </div>
-        <div class='message-left__text-wrapper'>
-          <div class='message-left__text'>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure,
-            eveniet quam eaque harum maiores delectus molestias culpa recusandae
-            neque, sunt ea atque porro voluptas vel officia, officiis nostrum
-            quas! Sapiente.
-            <span id='time-margin' class='message-left__time'>
-              11:56
-            </span>
+      {{#if selectChat}}
+        <div class='chat-section-messages-wrapper'>
+          {{{MessageInputField}}}
+                ${window.store.getState().messages.map(message => {
+                   return  `
+                   <div class='${message.user_id === userId ? "message-right__text-wrapper" : "message-left__text-wrapper"}'>
+                     <span class='message-left__text'>
+                       ${message.content}
+                     </span>
+                   </div>
+                   `
+                }).join("")}
           </div>
-        </div>
-      </div>
+          {{else}}
+        Выберите чат
+      {{/if}}
     </div>
   </div>
     `;
   }
 }
+
+
+
+const UpdateChatSection = withStore(ChatSection);
+
+export { UpdateChatSection as ChatSection };
