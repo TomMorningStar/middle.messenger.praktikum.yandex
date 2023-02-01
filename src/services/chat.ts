@@ -59,7 +59,7 @@ export const deleteChat: DispatchStateHandler<string> = async (dispatch, state, 
 
         if (!findUser) {
             dispatch({ loginFormError: "такого чата не найдено" })
-            return
+            return;
         }
 
         const chats = await chatAPI.meChats();
