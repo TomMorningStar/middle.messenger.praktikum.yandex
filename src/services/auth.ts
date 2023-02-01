@@ -18,8 +18,6 @@ type SignupPayload = {
   phone: string;
 }
 
-type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
-
 export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, state, action) => {
   try {
     await authAPI.signUp(action);

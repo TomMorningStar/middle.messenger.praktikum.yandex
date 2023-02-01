@@ -23,6 +23,8 @@ export const authAPI = {
 
   me: () => new HTTPTransport('/auth/').get<UserDTO | APIError>('user'),
 
+  findUserById: (userId: string) => new HTTPTransport('/user/').get<UserDTO | APIError>(`${userId}`),
+
   signUp: (data: SignupRequestData) => new HTTPTransport('/auth/').post('signup', data),
 
   logout: () => new HTTPTransport('/auth/').post('logout'),

@@ -1,5 +1,5 @@
 import { Block, Store } from 'core';
-import { createChat, deleteChat } from 'services/chat';
+import { addUserToChat, deleteChat } from 'services/chat';
 import { withStore } from 'utils';
 
 interface BurgerWindowProps {
@@ -22,7 +22,6 @@ class BurgerWindow extends Block {
       userDeleteWindow: false,
       deleteUserWindowError: '',
       actionAddUserButton: () => this.actionAddUser(),
-      deleteAddUserButton: () => this.actionDeleteUser(),
       formError: () => this.props.store.getState().loginFormError,
       addUser: () => {
         this.setProps({
@@ -37,8 +36,8 @@ class BurgerWindow extends Block {
 
       closeWindow: (e: { target: HTMLInputElement; }) => {
         if (e.target.className === 'user-action-window') {
-          this.props.store.dispatch({ loginFormError: ""})
-          
+          this.props.store.dispatch({ loginFormError: "" })
+
           this.setProps({
             userActiveWindow: false,
             userDeleteWindow: false,
@@ -48,20 +47,12 @@ class BurgerWindow extends Block {
     })
   }
 
-  actionDeleteUser() {
-    const title = this.refs.deleteUserRef.refs.actionInput.element.value;
-
-    if(title) {
-      this.props.store.dispatch(deleteChat, title);
-    }
-  }
-
 
   actionAddUser() {
-    const title = this.refs.addUserRef.refs.actionInput.element.value;
-    
-    if (title) {
-      this.props.store.dispatch(createChat, title)
+    const userId = this.refs.addUserRef.refs.actionInput.element.value;
+
+    if (userId) {
+      this.props.store.dispatch(addUserToChat, userId);
     }
   }
 
@@ -72,40 +63,21 @@ class BurgerWindow extends Block {
   render() {
     const formError = window.store.getState().loginFormError;
 
-    if(formError === "такого чата не найдено") {
+    if (formError === "такого человека не найдено") {
       return `
       <div class="burger-window">
-        {{{UserActionWindow ref="deleteUserRef" action=deleteAddUserButton closeWindow=closeWindow label="Удалить пользователя" buttonText="Удалить пользователя"}}}
+        {{{UserActionWindow placeholder="id" ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
       <div>
       `
     }
-
-    if(formError === "такого человека не найдено") {
-      return `
-      <div class="burger-window">
-        {{{UserActionWindow ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
-      <div>
-      `
-    }
-    
 
     return `
     <div class="burger-window"> 
         {{{UserActionButton addUser=addUser icon="+" value="Добавить пользователя"}}}
-        {{{UserActionButton deleteUser=deleteUser icon="×" value="Удалить пользователя"}}}
-
+        
         {{#if userActiveWindow}}
-          {{{UserActionWindow ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
+          {{{UserActionWindow placeholder="id" ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
         {{/if}}
-
-
-
-
-          {{#if userDeleteWindow}}
-            {{{UserActionWindow ref="deleteUserRef" action=deleteAddUserButton closeWindow=closeWindow label="Удалить пользователя" buttonText="Удалить пользователя"}}}
-          {{/if}}
-
-
     </div>`;
   }
 }
