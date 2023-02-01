@@ -5,22 +5,22 @@ import { getScreenComponent, Screens } from 'utils/screenList';
 
 const routes = [
   {
-    path: '/profile',
+    path: '/settings',
     block: Screens.Profile,
     shouldAuthorized: true,
   },
   {
-    path: '/signIn',
+    path: '/',
     block: Screens.SignIn,
     shouldAuthorized: false,
   },
   {
-    path: '/signUp',
+    path: '/sign-up',
     block: Screens.SignUp,
     shouldAuthorized: false,
   },
   {
-    path: '*',
+    path: '/messenger',
     block: Screens.Home,
     shouldAuthorized: true,
   },
@@ -35,7 +35,7 @@ export function initRouter(router: CoreRouter, store: Store<AppState>) {
         store.dispatch({ screen: route.block });
         return;
       } else {
-        window.router.go('/signIn')
+        window.router.go('/')
         store.dispatch({ screen: Screens.SignIn });
       }
     });

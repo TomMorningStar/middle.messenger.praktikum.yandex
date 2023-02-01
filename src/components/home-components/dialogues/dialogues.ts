@@ -21,6 +21,7 @@ class Dialogues extends Block {
           return `{{{DialogItem 
               id="${item.id}"
               store=store
+              avatar="${item.avatar}"
               nickName="${item.title}"
               messageNotification="${item.unread_count === 0 ? "" : item.unread_count}"
             }}}`;

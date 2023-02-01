@@ -1,6 +1,7 @@
 import { HTTPTransport } from 'core/HTTPTransport';
 
 export interface ChatInfo {
+    user: User;
     id: number;
     title: string;
     avatar: string;

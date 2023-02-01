@@ -26,8 +26,6 @@ export const authAPI = {
   signUp: (data: SignupRequestData) => new HTTPTransport('/auth/').post('signup', data),
 
   logout: () => new HTTPTransport('/auth/').post('logout'),
-
-
 };
 
 

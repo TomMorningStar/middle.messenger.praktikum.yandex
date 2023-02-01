@@ -20,6 +20,7 @@ class BurgerWindow extends Block {
     this.setProps({
       userActiveWindow: false,
       userDeleteWindow: false,
+      deleteUserWindowError: '',
       actionAddUserButton: () => this.actionAddUser(),
       deleteAddUserButton: () => this.actionDeleteUser(),
       formError: () => this.props.store.getState().loginFormError,
@@ -50,7 +51,9 @@ class BurgerWindow extends Block {
   actionDeleteUser() {
     const title = this.refs.deleteUserRef.refs.actionInput.element.value;
 
-    this.props.store.dispatch(deleteChat, title);
+    if(title) {
+      this.props.store.dispatch(deleteChat, title);
+    }
   }
 
 
@@ -67,6 +70,25 @@ class BurgerWindow extends Block {
   }
 
   render() {
+    const formError = window.store.getState().loginFormError;
+
+    if(formError === "такого чата не найдено") {
+      return `
+      <div class="burger-window">
+        {{{UserActionWindow ref="deleteUserRef" action=deleteAddUserButton closeWindow=closeWindow label="Удалить пользователя" buttonText="Удалить пользователя"}}}
+      <div>
+      `
+    }
+
+    if(formError === "такого человека не найдено") {
+      return `
+      <div class="burger-window">
+        {{{UserActionWindow ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
+      <div>
+      `
+    }
+    
+
     return `
     <div class="burger-window"> 
         {{{UserActionButton addUser=addUser icon="+" value="Добавить пользователя"}}}
@@ -76,9 +98,14 @@ class BurgerWindow extends Block {
           {{{UserActionWindow ref="addUserRef" action=actionAddUserButton closeWindow=closeWindow label="Добавить пользователя" buttonText="Добавить пользователя"}}}
         {{/if}}
 
-        {{#if userDeleteWindow}}
-         {{{UserActionWindow ref="deleteUserRef" action=deleteAddUserButton closeWindow=closeWindow label="Удалить пользователя" buttonText="Удалить пользователя"}}}
-        {{/if}}
+
+
+
+          {{#if userDeleteWindow}}
+            {{{UserActionWindow ref="deleteUserRef" action=deleteAddUserButton closeWindow=closeWindow label="Удалить пользователя" buttonText="Удалить пользователя"}}}
+          {{/if}}
+
+
     </div>`;
   }
 }

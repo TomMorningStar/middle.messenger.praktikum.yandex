@@ -26,14 +26,15 @@ class ChatSection extends Block {
   }
 
   render() {
-    const userId = this.props.store.getState().user.id;
+    const user = this.props.store.getState().user;
 
     return `
       <div class='chat-section'>
         <div class='chat-dialog-info'>
           <div class='flex'>
-              <img class='chat-dialog-info-img' src="https://cdn-icons-png.flaticon.com/512/924/924915.png" alt="автар" />
-           <div class='chat-dialog-info-nickname'>Андрей</div>
+              ${user.avatar !== "null" ? `<img class='chat-dialog-info-img' src="https://ya-praktikum.tech/api/v2/resources/${user.avatar}" alt="авaтар" />`
+        : `<img class='chat-dialog-info-img' src='https://cdn-icons-png.flaticon.com/512/924/924915.png' alt='avatar' />`}
+           <div class='chat-dialog-info-nickname'>${user.login}</div>
          </div>
       {{{Burger openBurgerWindow=openBurgerWindow}}}
 
@@ -46,21 +47,20 @@ class ChatSection extends Block {
         <div class='chat-section-messages-wrapper'>
           {{{MessageInputField}}}
                 ${window.store.getState().messages.map(message => {
-                   return  `
-                   <div class='${message.user_id === userId ? "message-right__text-wrapper" : "message-left__text-wrapper"}'>
+          return `
+                   <div class='${message.user_id === user.id ? "message-right__text-wrapper" : "message-left__text-wrapper"}'>
                      <span class='message-left__text'>
                        ${message.content}
                      </span>
                    </div>
                    `
-                }).join("")}
+        }).join("")}
           </div>
           {{else}}
         Выберите чат
       {{/if}}
     </div>
-  </div>
-    `;
+  </div>`;
   }
 }
 

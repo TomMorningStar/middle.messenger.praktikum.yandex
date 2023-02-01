@@ -12,7 +12,7 @@ interface ProfileLinkButtonProps {
   static componentName = 'ProfileLinkButton';
 
   constructor(props: ProfileLinkButtonProps) {
-    super({...props, events: {click: () => this.props.router.go('/profile')}})
+    super({...props, events: {click: () => this.props.router.go('/settings')}})
   }
 
   render() {

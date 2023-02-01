@@ -18,9 +18,9 @@ class AuxiliaryButton extends Block {
       events: {
         click: () => {
           if (this.props.text === "Войти") {
-            this.props.router.go('/signIn')
+            this.props.router.go('/')
           } else {
-            this.props.router.go('/signUp')
+            this.props.router.go('/sign-up')
           }
         }
       }

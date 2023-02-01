@@ -22,6 +22,10 @@ class UserActionWindow extends Block {
 
   }
 
+  componentDidUpdate() {
+    return true
+  }
+
   render() {
     return `
     <div class="user-action-window"> 
@@ -34,9 +38,6 @@ class UserActionWindow extends Block {
             {{{ActionInput ref="actionInput"}}}
             <div class="error">{{#if formError}}{{formError}}{{/if}}</div>
         </div>
-
-        
-  
 
         <div> 
             {{{ActionButton action=action text="${this.props.buttonText}"}}}

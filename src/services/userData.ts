@@ -5,34 +5,47 @@ import type { Dispatch } from 'core';
 import { transformUser } from 'utils';
 import { hasError } from 'utils/apiHasError';
 
-export const changeUserProfile = async (dispatch: Dispatch<AppState>, state: AppState, action: UserDTO,) => {
-    await userData.changeUserProfile({
-        first_name: action.first_name,
-        second_name: action.second_name,
-        display_name: action.display_name,
-        login: action.login,
-        email: action.email,
-        phone: action.phone
-    })
+type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
 
-    const responseUser = await authAPI.me();
+export const changeUserProfile: DispatchStateHandler<UserDTO> = async (dispatch, state, action) => {
+    try {
+        await userData.changeUserProfile({
+            first_name: action.first_name,
+            second_name: action.second_name,
+            display_name: action.display_name,
+            login: action.login,
+            email: action.email,
+            phone: action.phone
+        })
 
-    dispatch({ user: transformUser(responseUser as UserDTO) });
-}
+        const responseUser = await authAPI.me();
 
-
-export const changeUserAvatar = async (dispatch: Dispatch<AppState>, state: AppState, action: File,) => {
-    const responseUser = await userData.changeUserAvatar(action)
-
-    dispatch({ user: transformUser(responseUser as UserDTO) });
-}
-
-export const changePassword = async (dispatch: Dispatch<AppState>, state: AppState, action: File,) => {
-    const response = await userData.password(action)
-
-    if (hasError(response)) {
-        dispatch({ loginFormError: response.reason });
-        return;
+        dispatch({ user: transformUser(responseUser as UserDTO) });
+    } catch (error) {
+        console.error(error);
     }
+}
 
+
+export const changeUserAvatar: DispatchStateHandler<File> = async (dispatch, state, action) => {
+    try {
+        const responseUser = await userData.changeUserAvatar(action)
+
+        dispatch({ user: transformUser(responseUser as UserDTO) });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const changePassword: DispatchStateHandler<File> = async (dispatch, state, action) => {
+    try {
+        const response = await userData.password(action)
+
+        if (hasError(response)) {
+            dispatch({ loginFormError: response.reason });
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }

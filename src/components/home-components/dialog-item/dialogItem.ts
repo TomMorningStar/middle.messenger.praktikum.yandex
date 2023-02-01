@@ -6,6 +6,7 @@ interface DialogItemProps {
   messageNotification: number;
   nickName: string;
   store: Store<AppState>;
+  avatar: string;
   events?: {
     click?: () => void
   };
@@ -14,12 +15,11 @@ interface DialogItemProps {
 export class DialogItem extends Block {
   static componentName = 'DialogItem';
 
-  constructor({ store, id, nickName, messageNotification }: DialogItemProps) {
+  constructor({ store, avatar, id, nickName, messageNotification }: DialogItemProps) {
     super({
-      store, id, nickName, messageNotification, events: {
+      store, avatar, id, nickName, messageNotification, events: {
         click: () => {
-          this.props.store.dispatch(createChatRoom, this.props.id);
-
+          this.props.store.dispatch(createChatRoom, this.props.id)
         }
       }
     });
@@ -29,11 +29,8 @@ export class DialogItem extends Block {
     return `
         <div class='dialog-item'>
             <div>
-              <img
-                  class='item-img'
-                  src='https://cdn-icons-png.flaticon.com/512/924/924915.png'
-                  alt='avatar'
-              />
+              ${this.props.avatar !== "null" ? `<img class='item-img' src='https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}'  alt='avatar' />`
+        : `<img class='item-img' src='https://cdn-icons-png.flaticon.com/512/924/924915.png' alt='avatar' />`}
             </div>
 
             <div class='item-nickName'>{{nickName}}</div>
@@ -42,9 +39,7 @@ export class DialogItem extends Block {
             <div class='item-amount-messages'>
               {{messageNotification}}
             </div>
-          {{/if}}
-
-       
+          {{/if}}       
         </div>`;
   }
 }
