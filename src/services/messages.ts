@@ -1,19 +1,13 @@
 import { chatAPI } from 'api/chat';
-import type { Dispatch } from 'core';
 
-export const createChatRoom = async (
-    dispatch: Dispatch<AppState>,
-    state: AppState,
-    chatId: any,
-) => {
+export const createChatRoom: DispatchStateHandler<string> = async (dispatch, state, chatId) => {
     try {
         dispatch({ messages: [] })
 
         const { token } = await chatAPI.getToken(chatId);
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${state.user.id}/${chatId}/${token}`);
 
-
-        dispatch({ socket, selectChat: true })
+        dispatch({ socket, selectChat: chatId })
 
         socket.addEventListener('open', () => {
             console.log('Соединение установлено');
@@ -66,7 +60,7 @@ export const createChatRoom = async (
 
 
 
-export const sendMessage = async (dispatch: Dispatch<AppState>, state: AppState, action: string,) => {
+export const sendMessage: DispatchStateHandler<string> = async (dispatch, state, action) => {
     state.socket.send(JSON.stringify({
         content: action,
         type: 'message'

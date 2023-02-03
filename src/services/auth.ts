@@ -18,59 +18,63 @@ type SignupPayload = {
   phone: string;
 }
 
-export const signUp = async (
-  dispatch: Dispatch<AppState>,
-  state: AppState,
-  action: SignupPayload,
-) => {
-  await authAPI.signUp(action);
+export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, state, action) => {
+  try {
+    await authAPI.signUp(action);
 
-  const responseUser = await authAPI.me();
+    const responseUser = await authAPI.me();
 
-  if (apiHasError(responseUser)) {
-    dispatch(logout);
-    return;
+    if (apiHasError(responseUser)) {
+      dispatch(logout);
+      return;
+    }
+
+    dispatch({ user: transformUser(responseUser as UserDTO) });
+
+    window.router.go('/settings');
+  } catch (error) {
+    console.error(error);
   }
-
-  dispatch({ user: transformUser(responseUser as UserDTO) });
-
-  window.router.go('/profile');
 }
 
-export const login = async (
-  dispatch: Dispatch<AppState>,
-  state: AppState,
-  action: LoginPayload,
-) => {
+export const login: DispatchStateHandler<LoginPayload> = async (dispatch, state, action) => {
+  try {
+    const response = await authAPI.login(action);
 
-  const response = await authAPI.login(action);
+    if (apiHasError(response)) {
+      dispatch({ loginFormError: response.reason });
+      return;
+    }
 
-  if (apiHasError(response)) {
-    dispatch({ loginFormError: response.reason });
-    return;
+    const responseUser = await authAPI.me();
+
+    dispatch({ loginFormError: null });
+
+    if (apiHasError(response)) {
+      dispatch(logout);
+      return;
+    }
+
+    const chats = await chatAPI.meChats();
+
+    dispatch({ user: transformUser(responseUser as UserDTO), chats });
+
+    window.router.go('/settings');
+  } catch (error) {
+    console.error(error);
+
   }
-
-  const responseUser = await authAPI.me();
-
-  dispatch({ loginFormError: null });
-
-  if (apiHasError(response)) {
-    dispatch(logout);
-    return;
-  }
-
-  const chats = await chatAPI.meChats();
-
-  dispatch({ user: transformUser(responseUser as UserDTO), chats });
-
-  window.router.go('/profile');
 };
 
 export const logout = async (dispatch: Dispatch<AppState>) => {
+  try {
+    await authAPI.logout();
 
-  await authAPI.logout();
+    dispatch({ user: null });
 
-  dispatch({ user: null });
+    window.router.go('/');
+  } catch (error) {
+    console.error(error);
 
-  window.router.go('/signIn');
+  }
 };

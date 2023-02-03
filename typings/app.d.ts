@@ -1,4 +1,5 @@
 import { ChatInfo } from "api/chat";
+import { UserDTO } from "api/types";
 
 declare global {
   export type Nullable<T> = T | null;
@@ -20,6 +21,8 @@ declare global {
     }
   };
 
+  export type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
+
   export type Keys<T extends Record<string, unknown>> = keyof T;
   export type Values<T extends Record<string, unknown>> = T[Keys<T>];
 
@@ -33,7 +36,8 @@ declare global {
     chats: ChatInfo[];
     soket: any;
     messages: Message[];
-    selectChat: boolean;
+    selectChat: string;
+    chatUsers: UserDTO[];
   };
 
   export type User = {
@@ -45,6 +49,7 @@ declare global {
     avatar: string;
     phone: string;
     email: string;
+
   };
 }
 

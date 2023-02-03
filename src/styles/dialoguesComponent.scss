@@ -40,9 +40,20 @@
         outline: none;
       }
     }
+
+    .action-chat-button {
+      width: 100%;
+      border: 1px solid #3f99ff;
+      padding: 5px;
+      margin: 2px 0;
+      background-color: unset;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
 
   .dialogues {
+    width: 250px;
     height: calc(100% - 112px);
     overflow-y: scroll;
 
@@ -62,8 +73,13 @@
       background-clip: content-box;
     }
 
+    .select-chat {
+      background-color: #e4edfd;
+    }
+
     .dialog-item {
-      width: 180px;
+      width: 235px;
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -74,6 +90,20 @@
       &:hover {
         background-color: #e4edfd;
         transition: 0.3s;
+      }
+
+      .delete-button {
+        color: red;
+        position: absolute;
+        top: 1;
+        right: 1;
+        border: 1px solid red;
+        padding: 2px;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+        line-height: 14px;
+        cursor: pointer;
       }
 
       .item-img {

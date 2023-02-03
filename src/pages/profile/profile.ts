@@ -57,7 +57,7 @@ class Profile extends Block {
         changePassword: false,
       });
     } else {
-      this.props.router.go('/')
+      this.props.router.go('/messenger')
     }
   }
 

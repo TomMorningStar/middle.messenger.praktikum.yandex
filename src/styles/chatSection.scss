@@ -4,9 +4,69 @@
   padding: 0 20px;
   position: relative;
 
+  .delete-button {
+    color: red;
+    top: 1;
+    right: 1;
+    border: 1px solid red;
+    padding: 2px;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    line-height: 14px;
+    cursor: pointer;
+  }
+
+  .chat-users-wrapper {
+    position: absolute;
+    top: 65px;
+    right: 610px;
+
+
+    .chat-users-block {
+      min-width: 210px;
+      z-index: 3;
+      background-color: #fff;
+      border-radius: 12px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+      display: flex;
+
+      box-shadow: 0 0 6px #00000024;
+  
+      .info-burger {
+        cursor: pointer;
+        height: 25px;
+        align-items: center;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+    
+        &:hover {
+          color: #3f99ff;
+        }
+      }
+    
+      .icon {
+        width: 23px;
+        height: 23px;
+        border: 2px solid #3f99ff;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 18px;
+        font-size: 14px;
+        color: #3f99ff;
+        font-weight: bold;
+        margin-right: 15px;
+      }
+    }
+  }
+
+
+
   .chat-dialog-info {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #eaeaea;
     padding: 10px 0;
@@ -31,7 +91,10 @@
     }
 
     .chat-dialog-options {
-      padding: 0 0 0 10px;
+      padding: 10px;
+      margin-left: 300px;
+      border: 1px solid #3f99ff;
+      border-radius: 5px;
     }
   }
 

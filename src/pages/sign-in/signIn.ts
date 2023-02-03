@@ -39,7 +39,7 @@ export class SignIn extends Block<SignInPageProps> {
         })
 
         if (!errorMessage.authLogin && !errorMessage.authPassword) {
-          this.props.router.go('/')
+          this.props.router.go('/settings')
           this.props.store.dispatch(login, loginValue)
         }
       },

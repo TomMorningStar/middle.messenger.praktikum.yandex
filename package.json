@@ -23,22 +23,22 @@
   "description": "",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
     "@parcel/transformer-inline-string": "2.8.2",
-    "@parcel/transformer-sass": "^2.7.0",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "eslint": "^8.28.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "nanoid": "^4.0.0",
-    "parcel": "^2.7.0",
-    "stylelint": "^14.15.0",
-    "stylelint-config-standard-scss": "^6.1.0",
-    "typescript": "^4.9.3"
+    "@parcel/transformer-sass": "2.7.0",
+    "@typescript-eslint/eslint-plugin": "5.44.0",
+    "@typescript-eslint/parser": "5.44.0",
+    "eslint": "8.28.0",
+    "eslint-config-airbnb": "19.0.4",
+    "nanoid": "4.0.0",
+    "parcel": "2.7.0",
+    "stylelint": "14.15.0",
+    "stylelint-config-standard-scss": "6.1.0",
+    "typescript": "4.9.3"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "handlebars": "^4.7.7",
-    "scss": "^0.2.4"
+    "express": "4.18.2",
+    "handlebars": "4.7.7",
+    "scss": "0.2.4"
   }
 }

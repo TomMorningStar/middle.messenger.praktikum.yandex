@@ -1,58 +1,96 @@
 import { authAPI } from 'api/auth';
-import { chatAPI, ChatInfo } from 'api/chat';
-import { userData } from 'api/userData';
-import type { Dispatch } from 'core';
+import { chatAPI } from 'api/chat';
+import { hasError } from 'utils/apiHasError';
 
-export const createChat = async (dispatch: Dispatch<AppState>, state: AppState, action: string,) => {
-    const getUser = await userData.searchUser(action);
-    const findUser = getUser.find(el => el.login === action);
+export const addUserToChat: DispatchStateHandler<string> = async (dispatch, state, action) => {
+    try {
+        const response = await authAPI.findUserById(action);
 
-    if (!findUser) {
-        dispatch({ loginFormError: "такого человека не найдено" })
-        return
+        if (hasError(response)) {
+            dispatch({ loginFormError: response.reason });
+            return
+        }
+
+        await chatAPI.addUserToChat(response.id, Number(state.selectChat))
+
+        const chatUsers = await chatAPI.getChatUsers(state.selectChat);
+
+        if (hasError(chatUsers)) {
+            dispatch({ loginFormError: chatUsers.reason });
+            return
+        }
+
+        dispatch({ chatUsers });
+    } catch (error) {
+        console.error(error);
     }
-
-    const chat = await chatAPI.create(action);
-    const me = await authAPI.me();
-
-
-    await chatAPI.addUserToChat([me.id, findUser.id], chat.id)
-
-    const chats = await chatAPI.meChats();
-
-    dispatch({ chats });
 }
 
-export const deleteChat = async (dispatch: Dispatch<AppState>, state: AppState, action: string,) => {
-    const getUser = await userData.searchUser(action);
-    const findUser = getUser.find(el => el.login === action);
+export const deleteUserInChat: DispatchStateHandler<string> = async (dispatch, state, action) => {
+    try {
+        const response = await chatAPI.deleteUsersInChat(Number(action), Number(state.selectChat));
 
-    if (!findUser) {
-        dispatch({ loginFormError: "такого чата не найдено" })
-        return
+        if (hasError(response)) {
+            dispatch({ loginFormError: response.reason });
+            return;
+        }
+
+        if(state.chatUsers.length === 1) {
+     
+            dispatch({ chatUsers: [], selectChat: '', chats: [] });
+            return
+        }
+        
+        const chatUsers = await chatAPI.getChatUsers(state.selectChat);
+
+        if (hasError(chatUsers)) {
+            dispatch({ loginFormError: chatUsers.reason });
+            return;
+        }
+
+        dispatch({ chatUsers });
+    } catch (error) {
+        console.error(error);
     }
-
-    const chats = await chatAPI.meChats();
-    const chat: ChatInfo = chats.find(el => el.title === action);
-
-    await chatAPI.delete(chat.id)
-
-    const newChants = await chatAPI.meChats();
-
-    dispatch({ chats: newChants });
 }
 
-export const getToken = async (dispatch: Dispatch<AppState>, state: AppState, action: string,) => {
+export const deleteChatById: DispatchStateHandler<number> = async (dispatch, state, action) => {
+    try {
 
-   const {token} = await chatAPI.getToken(action);
+        await chatAPI.delete(action)
 
-   dispatch({ token: token })
+        const chats = await chatAPI.meChats();
 
-    console.log(state);
-    
-
-
+        dispatch({ chats, selectChat: "" });
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+
+export const createChatByTitle: DispatchStateHandler<string> = async (dispatch, state, action) => {
+    try {
+
+        await chatAPI.create(action);
+
+        const chats = await chatAPI.meChats();
+
+        dispatch({ chats });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getChatUsers: DispatchStateHandler<string> = async (dispatch, state, action) => {
+    try {
+        const chatUsers = await chatAPI.getChatUsers(action);
+
+        dispatch({ chatUsers });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 
 

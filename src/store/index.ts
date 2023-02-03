@@ -6,6 +6,7 @@ export const defaultState: AppState = {
   chats: [],  
   soket: null,
   messages: [],
-  selectChat: false,
+  selectChat: "",
+  chatUsers: [],
 };
 

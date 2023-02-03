@@ -5,10 +5,10 @@ import SignUpPage from 'pages/sign-up';
 import { BlockClass } from 'core';
 
 export enum Screens {
-  Profile = 'profile',
-  SignIn = 'signIn',
-  Home = 'home',
-  SignUp = 'signUp',
+  Profile = 'settings',
+  SignIn = '/',
+  Home = 'messenger',
+  SignUp = 'sign-up',
 }
 
 const map: Record<Screens, BlockClass<any>> = {

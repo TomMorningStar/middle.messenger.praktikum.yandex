@@ -1,3 +1,5 @@
+import { queryString } from "helpers/queryString";
+
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -6,21 +8,24 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
+type PlainObject<T = unknown> = {
+  [k in string]: T;
+};
+
 type Options = {
   method: METHODS;
   data?: any;
 };
 
 export class HTTPTransport {
-
   static API_URL = 'https://ya-praktikum.tech/api/v2';
   protected endpoint: string;
 
   constructor(endpoint: string) {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
-  public get<Response>(path = '/'): Promise<Response> {
-    return this.request<Response>(this.endpoint + path);
+  public get<Response>(path = '/', data: PlainObject = {}): Promise<Response> {
+    return this.request<Response>(this.endpoint + path + queryString(data));
   }
 
   public post<Response = void>(path: string, data?: unknown): Promise<Response> {
@@ -51,11 +56,8 @@ export class HTTPTransport {
     });
   }
 
-
   private request<Response>(url: string, options: Options = {method: METHODS.GET}): Promise<Response> {
     const {method, data} = options;
-
-    
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -63,9 +65,7 @@ export class HTTPTransport {
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-
             resolve(xhr.response);
-
         }
       };
 
