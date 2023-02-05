@@ -29,15 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   store.dispatch(initApp);
 
   store.on('changed', (prevState, nextState) => {
-
       console.log(
         '%cstore updated',
         'background: #222; color: #bada55',
         nextState,
       );
-    
   });
 });
-
-
-

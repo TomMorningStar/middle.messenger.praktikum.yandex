@@ -1,5 +1,5 @@
 import EventBus from './EventBus';
-import { nanoid } from 'nanoid';
+import { v4 as uuidv4 } from 'uuid';
 import Handlebars from 'handlebars';
 
 type Events = Values<typeof Block.EVENTS>;
@@ -18,7 +18,7 @@ export default class Block<P = any> {
     FLOW_RENDER: 'flow:render',
   } as const;
 
-  public id = nanoid(6);
+  public id = uuidv4();
 
   protected _element: Nullable<HTMLElement> = null;
   protected props: Readonly<P>;
@@ -41,7 +41,7 @@ export default class Block<P = any> {
 
     this.eventBus = () => eventBus;
 
-    this._registerEvents(eventBus);
+    this._registerEvents(eventBus); 
 
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }

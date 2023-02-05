@@ -1,5 +1,5 @@
 import { Block, CoreRouter, Store } from 'core';
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { Screens, withRouter, withStore } from 'utils';
 import { signUp } from 'services/auth';
 

@@ -1,5 +1,5 @@
 import { Block, Store } from 'core';
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { changeUserAvatar, changeUserProfile } from 'services/userData';
 
 interface ChangeDataProps {

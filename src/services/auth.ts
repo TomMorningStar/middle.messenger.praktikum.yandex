@@ -71,10 +71,7 @@ export const logout = async (dispatch: Dispatch<AppState>) => {
     await authAPI.logout();
 
     dispatch({ user: null });
-
-    window.router.go('/');
   } catch (error) {
     console.error(error);
-
   }
 };

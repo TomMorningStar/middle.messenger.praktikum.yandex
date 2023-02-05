@@ -3,8 +3,9 @@ import { deleteUserInChat } from 'services/chat';
 import { withStore } from 'utils';
 
 interface ButtonProps {
-    id: string,
-    store: Store<AppState>
+    id: string;
+    click?: () => void;
+    store: Store<AppState>;
 }
 
 class Button extends Block {
@@ -21,7 +22,7 @@ class Button extends Block {
     }
 
     render() {
-        return `<button class="delete-button">x</button>`;
+        return `<button  data-testid="button" class="delete-button">x</button>`;
     }
 }
 

@@ -1,4 +1,4 @@
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { Block } from 'core';
 
 interface ControlledInputProps {

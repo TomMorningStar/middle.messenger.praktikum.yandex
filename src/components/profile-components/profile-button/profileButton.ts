@@ -8,22 +8,17 @@ interface ProfileButtonProps {
   goChangePasswordPage?: () => void;
   onChangePassword?: () => void;
   onChangeUserData?: () => void;
+  id?: string;
 }
-
 
 export class ProfileButton extends Block {
   static componentName = 'ProfileButton';
 
-  constructor({ text, styles, signOut, goChangeDataPage, goChangePasswordPage, onChangePassword, onChangeUserData }: ProfileButtonProps) {
-    super({ text, styles, events: { click: signOut || goChangeDataPage || goChangePasswordPage || onChangePassword || onChangeUserData } })
+  constructor({ text, id, styles, signOut, goChangeDataPage, goChangePasswordPage, onChangePassword, onChangeUserData }: ProfileButtonProps) {
+    super({ text, id, styles, events: { click: signOut || goChangeDataPage || goChangePasswordPage || onChangePassword || onChangeUserData } })
   }
 
   render() {
-    return `<button type="submit" class="{{styles}}">{{text}}</button>`;
+    return `<button {{#if id}}data-testid="{{id}}"{{/if}}  type="submit" class="{{styles}}">{{text}}</button>`;
   }
 }
-
-
-
-
-// return `<button class='save-data-button no-styles cursor-pointer'>Сохранить</button>`;

@@ -1,5 +1,5 @@
 import { Block, Store } from 'core';
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { changePassword } from 'services/userData';
 import { withStore } from 'utils';
 

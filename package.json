@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engine": "18.12.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "parcel index.html --port 3000 --no-cache",
     "build": "parcel build index.html && cp _redirects dist/_redirects",
     "start": "npm run build && node ./server.js"
@@ -24,21 +24,59 @@
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
     "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@babel/core": "7.17.8",
+    "@babel/preset-env": "7.20.2",
+    "@babel/preset-typescript": "7.18.6",
     "@parcel/transformer-inline-string": "2.8.2",
     "@parcel/transformer-sass": "2.7.0",
+    "@testing-library/dom": "8.13.0",
+    "@testing-library/jest-dom": "5.16.4",
+    "@types/jest": "27.4.1",
+    "@types/sinon": "10.0.13",
+    "@types/testing-library__dom": "7.5.0",
+    "@types/uuid": "9.0.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "dotenv": "16.0.3",
     "eslint": "8.28.0",
     "eslint-config-airbnb": "19.0.4",
-    "nanoid": "4.0.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "27.5.1",
+    "msw": "1.0.0",
     "parcel": "2.7.0",
+    "sinon": "15.0.1",
     "stylelint": "14.15.0",
     "stylelint-config-standard-scss": "6.1.0",
-    "typescript": "4.9.3"
+    "typescript": "4.9.3",
+    "uuid": "9.0.0",
+    "whatwg-fetch": "3.6.2"
   },
   "dependencies": {
+    "babel-core": "6.26.3",
     "express": "4.18.2",
     "handlebars": "4.7.7",
     "scss": "0.2.4"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "<rootDir>/src/tests/setupEnv.ts"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/tests/setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(scss|png|svg)$": "identity-obj-proxy",
+      "^core(.*)$": "<rootDir>/src/core$1",
+      "^components(.*)$": "<rootDir>/src/components$1",
+      "^utils(.*)$": "<rootDir>/src/utils$1",
+      "^services(.*)$": "<rootDir>/src/services$1",
+      "^api(.*)$": "<rootDir>/src/api$1",
+      "^store(.*)$": "<rootDir>/src/store$1",
+      "^pages(.*)$": "<rootDir>/src/pages$1",
+      "^tests(.*)$": "<rootDir>/src/tests$1"
+    }
   }
 }
