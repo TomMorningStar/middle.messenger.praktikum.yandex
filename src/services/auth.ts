@@ -18,7 +18,7 @@ type SignupPayload = {
   phone: string;
 }
 
-export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, state, action) => {
+export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, _state, action) => {
   try {
     await authAPI.signUp(action);
 
@@ -37,7 +37,7 @@ export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, stat
   }
 }
 
-export const login: DispatchStateHandler<LoginPayload> = async (dispatch, state, action) => {
+export const login: DispatchStateHandler<LoginPayload> = async (dispatch, _state, action) => {
   try {
     const response = await authAPI.login(action);
 

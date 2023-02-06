@@ -1,1 +1,1 @@
-export { default } from './serveBadRequest';
+export { ServerBadRequest as default} from './serveBadRequest';

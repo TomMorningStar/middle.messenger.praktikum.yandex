@@ -4,7 +4,7 @@ import { userData } from 'api/userData';
 import { transformUser } from 'utils';
 import { hasError } from 'utils/apiHasError';
 
-export const changeUserProfile: DispatchStateHandler<UserDTO> = async (dispatch, state, action) => {
+export const changeUserProfile: DispatchStateHandler<UserDTO> = async (dispatch, _state, action) => {
     try {
         await userData.changeUserProfile({
             first_name: action.first_name,
@@ -24,7 +24,7 @@ export const changeUserProfile: DispatchStateHandler<UserDTO> = async (dispatch,
 }
 
 
-export const changeUserAvatar: DispatchStateHandler<File> = async (dispatch, state, action) => {
+export const changeUserAvatar: DispatchStateHandler<File> = async (dispatch, _state, action) => {
     try {
         const responseUser = await userData.changeUserAvatar(action)
 
@@ -34,7 +34,7 @@ export const changeUserAvatar: DispatchStateHandler<File> = async (dispatch, sta
     }
 }
 
-export const changePassword: DispatchStateHandler<File> = async (dispatch, state, action) => {
+export const changePassword: DispatchStateHandler<{oldPassword: string, newPassword: string}> = async (dispatch, _state, action) => {
     try {
         const response = await userData.password(action)
 

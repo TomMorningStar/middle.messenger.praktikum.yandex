@@ -1,4 +1,4 @@
-import { getByTestId, prettyDOM, queryByTestId, waitFor } from '@testing-library/dom'
+import { getByTestId, queryByTestId, waitFor } from '@testing-library/dom'
 import { renderBlock, step } from 'tests/renderUtils';
 import ProfilePage from './profile';
 

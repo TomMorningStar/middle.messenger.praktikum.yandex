@@ -34,7 +34,7 @@ describe('core/Router/PathRouter', () => {
 
         router.back(); 
 
-        window.onpopstate = (event: PopStateEvent) => {
+        window.onpopstate = (_event: PopStateEvent) => {
             expect(window.location.pathname).toBe('/route1');
         };
     });
@@ -48,7 +48,7 @@ describe('core/Router/PathRouter', () => {
         router.back();
         router.forward();
 
-        window.onpopstate = (event: PopStateEvent) => {
+        window.onpopstate = (_event: PopStateEvent) => {
             expect(window.location.pathname).toBe('/route2');
         };
     });

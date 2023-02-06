@@ -1,5 +1,4 @@
 import { HTTPTransport } from 'core/HTTPTransport';
-import { UserDTO } from './types';
 
 export interface ChatInfo {
   user: User;
@@ -17,7 +16,7 @@ export interface ChatInfo {
 export const chatAPI = {
   create: (title: string) => new HTTPTransport('/chats').post<{ id: number }>("/", { title }),
 
-  meChats: () => new HTTPTransport('/chats').get<UserDTO[]>('/'),
+  meChats: () => new HTTPTransport('/chats').get<ChatInfo[]>('/'),
 
   getChatUsers: (chatId: string) => new HTTPTransport('/chats').get<ChatInfo[]>(`/${chatId}/users`),
 

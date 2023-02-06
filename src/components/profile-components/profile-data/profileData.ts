@@ -1,9 +1,12 @@
+import { CoreRouter, Store } from 'core';
 import Block from 'core/Block';
 import { logout } from 'services/auth';
 import { withRouter, withStore } from 'utils';
 
 interface ProfileDataProps {
   user: User;
+  router: CoreRouter;
+  store: Store<AppState>;
   signOut: () => void;
   goChangeDataPage: () => void;
   goChangePasswordPage: () => void;

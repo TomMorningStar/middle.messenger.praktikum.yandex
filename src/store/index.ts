@@ -4,7 +4,7 @@ export const defaultState: AppState = {
   loginFormError: null,
   user: null,
   chats: [],  
-  soket: null,
+  socket: null,
   messages: [],
   selectChat: "",
   chatUsers: [],

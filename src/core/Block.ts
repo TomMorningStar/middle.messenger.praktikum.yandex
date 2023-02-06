@@ -5,7 +5,7 @@ import Handlebars from 'handlebars';
 type Events = Values<typeof Block.EVENTS>;
 
 export interface BlockClass<P> extends Function {
-  new (props: P): Block<P>;
+  new(props: P): Block<P>;
   componentName?: string;
 }
 
@@ -20,14 +20,14 @@ export default class Block<P = any> {
 
   public id = uuidv4();
 
-  protected _element: Nullable<HTMLElement> = null;
-  protected props: Readonly<P>;
+  protected _element: Nullable<any> = null;
+  protected props: any;
   protected children: { [id: string]: Block } = {};
 
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  protected refs: { [key: string]: HTMLElement } = {};
+  protected refs: { [key: string]: any } = {};
 
   public static componentName?: string;
 
@@ -41,7 +41,7 @@ export default class Block<P = any> {
 
     this.eventBus = () => eventBus;
 
-    this._registerEvents(eventBus); 
+    this._registerEvents(eventBus);
 
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
@@ -73,7 +73,7 @@ export default class Block<P = any> {
     this._element = this._createDocumentElement('div');
   }
 
-  protected getStateFromProps(props: any): void {
+  protected getStateFromProps(_props: any): void {
     this.state = {};
   }
 
@@ -88,14 +88,14 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {}
+  componentDidMount(_props: P) { }
 
   _componentWillUnmount() {
     this.eventBus().destroy();
     this.componentWillUnmount();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
@@ -105,7 +105,7 @@ export default class Block<P = any> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+  componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 
@@ -143,7 +143,7 @@ export default class Block<P = any> {
 
     this._element!.replaceWith(newElement);
 
-    this._element = newElement as HTMLElement;
+    this._element = newElement as any;
     this._addEvents();
   }
 
@@ -151,7 +151,7 @@ export default class Block<P = any> {
     return '';
   }
 
-  getContent(): HTMLElement {
+  getContent(): any {
     // Хак, чтобы вызвать CDM только после добавления в DOM
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
