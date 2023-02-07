@@ -6,7 +6,8 @@
     "test": "jest",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server --mode development --open",
+    "prepare": "husky install"
   },
   "alias": {
     "core": "./src/core",
@@ -16,6 +17,12 @@
     "pages": "./src/pages",
     "api": "./src/api",
     "services": "./src/services"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all",
+      "pre-push": "npm run other command"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -40,6 +47,7 @@
     "eslint-config-airbnb": "19.0.4",
     "handlebars-loader": "1.7.3",
     "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.3",
     "identity-obj-proxy": "3.0.0",
     "jest": "27.5.1",
     "mini-css-extract-plugin": "2.7.2",
