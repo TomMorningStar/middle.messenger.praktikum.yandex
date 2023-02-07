@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "engine": "18.12.0",
   "scripts": {
-    "lint:scss": "stylelint **/*.css",
-    "lint:ts": "eslint .",
+    "lint:css": "stylelint **/*.css",
+    "lint:js": "eslint .",
+    "lint": "npm-run-all --parallel lint:*",
     "test": "jest",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -22,7 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
+      "pre-commit": "npm-run-all test lint",
       "pre-push": "npm run other command"
     }
   },
