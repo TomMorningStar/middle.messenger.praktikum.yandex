@@ -1,6 +1,12 @@
+@import "./styles/authPage";
+@import "./styles/dialoguesComponent";
+@import "./styles/chatSection";
+@import "./styles/profilePage";
+@import "./styles/errorPages";
+
 * {
   box-sizing: border-box;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
 }
 
 body {
@@ -31,10 +37,3 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
-
-@import "./styles/authPage.scss";
-@import "./styles/dialoguesComponent.scss";
-@import "./styles/chatSection.scss";
-@import "./styles/profilePage.scss";
-@import "./styles/errorPages.scss";
-

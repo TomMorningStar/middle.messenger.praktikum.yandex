@@ -1,7 +1,7 @@
 .select-file-wrap {
   width: 162px;
-  background: #ffffff;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  background: #fff;
+  box-shadow: 0 0 6px rgb(0 0 0 / 0.14%);
   border-radius: 12px;
   z-index: 2;
   position: absolute;
@@ -16,19 +16,18 @@
 }
 
 .info {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    cursor: pointer;
-    height: 25px;
-    align-items: center;
-    margin-bottom: 16px;
+  display: flex;
+  font-size: 12px;
+  cursor: pointer;
+  height: 25px;
+  align-items: center;
+  margin-bottom: 16px;
 
-    &:hover {
-        color: #3f99ff;
-    }
+  &:hover {
+    color: #3f99ff;
+  }
 
-    svg {
-        margin-right: 15px;
-    }
+  svg {
+    margin-right: 15px;
+  }
 }

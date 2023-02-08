@@ -16,6 +16,7 @@ type Options = {
   data?: any;
 };
 
+
 export class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
   protected endpoint: string;

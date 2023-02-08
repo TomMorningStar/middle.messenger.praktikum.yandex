@@ -122,8 +122,8 @@ export class SignUp extends Block {
   render() {
     return `
     <main>
-      <div class='authPage'>
-        <div class='authCart'>
+      <div class='auth-page'>
+        <div class='auth-cart'>
           <h3>Регистрация</h3>
 
             <form action=''>

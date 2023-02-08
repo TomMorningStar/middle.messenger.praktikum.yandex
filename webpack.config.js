@@ -7,7 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.ts', '.json'],
@@ -20,41 +20,41 @@ module.exports = {
       utils: path.resolve(__dirname, './src/utils'),
       services: path.resolve(__dirname, './src/services'),
       api: path.resolve(__dirname, './src/api'),
-    }
+    },
   },
   devServer: {
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.hbs$/,
         use: [
-          'handlebars-loader'
-        ]
-      }
-    ]
+          'handlebars-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: 'style.css',
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
-  ]
-}
+      template: './src/index.html',
+    }),
+  ],
+};

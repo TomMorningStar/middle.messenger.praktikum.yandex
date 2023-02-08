@@ -54,8 +54,8 @@ export class SignIn extends Block<SignInPageProps> {
 
     return `
       <main data-testid="sign-in-page">
-        <div class='authPage'>
-          <div class='authCart'>
+        <div class='auth-page'>
+          <div class='auth-cart'>
             <h3>Вход</h3>
 
             {{{ControlledInput 
