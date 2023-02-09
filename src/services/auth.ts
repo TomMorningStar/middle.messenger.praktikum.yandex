@@ -18,6 +18,8 @@ type SignupPayload = {
   phone: string;
 }
 
+type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
+
 export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, _state, action) => {
   try {
     await authAPI.signUp(action);
@@ -71,7 +73,10 @@ export const logout = async (dispatch: Dispatch<AppState>) => {
     await authAPI.logout();
 
     dispatch({ user: null });
+
+    window.router.go('/');
   } catch (error) {
     console.error(error);
+
   }
 };

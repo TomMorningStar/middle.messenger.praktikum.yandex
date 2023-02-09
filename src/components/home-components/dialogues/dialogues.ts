@@ -13,6 +13,8 @@ class Dialogues extends Block {
     super(props);
   }
 
+
+
   render() {
     return `
     <div class='dialogues'>
@@ -21,8 +23,10 @@ class Dialogues extends Block {
           return `{{{DialogItem 
               id="${item.id}"
               store=store
-              avatar="${item.avatar}"
-              nickName="${item.title}"
+              lastMessageContent="${item.last_message?.content}"
+              lastMessageUserLogin="${item.last_message?.user?.login}"
+              avatar="${item.user?.avatar}"
+              nickName="${item.user?.login}"
               messageNotification="${item.unread_count === 0 ? "" : item.unread_count}"
             }}}`;
         })

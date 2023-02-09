@@ -1,5 +1,4 @@
 import { Block, Store } from 'core';
-import { deleteChatById, getChatUsers } from 'services/chat';
 import { createChatRoom } from 'services/messages';
 
 interface DialogItemProps {
@@ -8,6 +7,8 @@ interface DialogItemProps {
   nickName: string;
   store: Store<AppState>;
   avatar: string;
+  lastMessageContent?: string;
+  lastMessageUserLogin?: string;
   events?: {
     click?: () => void
   };
@@ -16,43 +17,49 @@ interface DialogItemProps {
 export class DialogItem extends Block {
   static componentName = 'DialogItem';
 
-  constructor({ store, avatar, id, nickName, messageNotification }: DialogItemProps) {
+  constructor({ store, lastMessageContent, lastMessageUserLogin, avatar, id, nickName, messageNotification }: DialogItemProps) {
     super({
-      store, avatar, id, nickName, messageNotification, events: {
+      store, lastMessageContent, lastMessageUserLogin, avatar, id, nickName, messageNotification, events: {
         click: () => {
-          this.props.store.dispatch(createChatRoom, this.props.id)
-          this.props.store.dispatch(getChatUsers, this.props.id)
-        },
+          this.props.store.dispatch(createChatRoom, this.props.id);
+        }
       }
     });
-
-    this.setProps({
-      deleteChat: (e: MouseEvent) => {
-        e.stopPropagation();
-
-        this.props.store.dispatch(deleteChatById, id);
-      }
-      
-    })
   }
 
   render() {
+    function truncateString(inputString: string): string {
+      if (inputString.length > 37) {
+        return inputString.slice(0, 35) + "...";
+      }
+      return inputString;
+    }
+
     return `
-        <div class='${this.props.id === window.store.getState().selectChat ? "dialog-item select-chat" : "dialog-item"}'>
-            <div>
-              ${this.props.avatar !== "null" ? `<img class='item-img' src='https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}'  alt='avatar' />`
+      <div class='dialog-item'>
+        <div>
+          ${this.props.avatar !== "null" ? `<img class='item-img' src='https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}'  alt='avatar' />`
         : `<img class='item-img' src='https://cdn-icons-png.flaticon.com/512/924/924915.png' alt='avatar' />`}
+              </div>
+        <div class='item-info-wrappper'>
+          <div class='item-info'>
+              <div class='item-nickName'>{{nickName}}</div>
+          </div>
+        <div class='item-info'>
+            <div class='item-text'>
+              ${this.props?.lastMessageUserLogin === this.props.store.getState().user.login ? '<strong style="color: black">Вы: </strong>' : ''}
+              
+              ${this.props.lastMessageContent !== "undefined" ? truncateString(this.props.lastMessageContent) : "Пусто"}
             </div>
-
-            <div class='item-nick-name'>{{nickName}}</div>
-
-            {{{DeleteButton deleteChat=deleteChat}}}
-
-          {{#if messageNotification}}
-            <div class='item-amount-messages'>
-              {{messageNotification}}
-            </div>
-          {{/if}}       
-        </div>`;
+            {{#if messageNotification}}
+                <div class='item-amount-messages'>
+                {{messageNotification}}
+              </div>
+            {{/if}}
+        </div>
+        </div>
+      </div>`;
   }
 }
+
+

@@ -36,7 +36,7 @@ declare global {
     chats: ChatInfo[];
     socket: any;
     messages: Message[];
-    selectChat: string;
+    selectChat: boolean;
     chatUsers: UserDTO[];
   };
 

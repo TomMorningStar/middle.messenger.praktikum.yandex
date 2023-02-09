@@ -1,91 +1,85 @@
 import { authAPI } from 'api/auth';
 import { chatAPI } from 'api/chat';
+import { UserDTO } from 'api/types';
+import { userData } from 'api/userData';
+import type { Dispatch } from 'core';
+import { transformUser } from 'utils';
 import { hasError } from 'utils/apiHasError';
 
-export const addUserToChat: DispatchStateHandler<string> = async (dispatch, state, action) => {
+type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
+
+export const createChat: DispatchStateHandler<string> = async (dispatch, _state, action) => {
     try {
-        const response = await authAPI.findUserById(action);
+        const getUser = await userData.searchUser(action);
 
-        if (hasError(response)) {
-            dispatch({ loginFormError: response.reason });
+        // Поиск зарегистрированного человека
+        const findUser = getUser.find(el => el.login === action);
+
+        if (!findUser) {
+            dispatch({ loginFormError: "такого человека не найдено" })
             return
         }
 
-        await chatAPI.addUserToChat(response.id, Number(state.selectChat))
+        // Создание чата
+        const chat = await chatAPI.create(action);
+        const me = await authAPI.me();
 
-        const chatUsers = await chatAPI.getChatUsers(state.selectChat);
+        // Добавление юзеров в чат
+        await chatAPI.addUserToChat([me.id, findUser.id], chat.id)
 
-        if (hasError(chatUsers)) {
-            dispatch({ loginFormError: chatUsers.reason });
-            return
-        }
+        const chats = await chatAPI.meChats();
+        const updateChatKeys = chats.map(async chat => {
+            const chatUsers: any = await chatAPI.getChatUsers(chat.id);
 
-        dispatch({ chatUsers });
+            const findUser = chatUsers.find((user: any) => user.login !== me.login)
+
+            return {
+                ...chat, user: transformUser(findUser as UserDTO), title: findUser.login
+            }
+        })
+
+        await Promise.all(updateChatKeys).then((chats) => {
+            dispatch({ user: transformUser(me as UserDTO), chats });
+        });
+
     } catch (error) {
         console.error(error);
     }
 }
 
-export const deleteUserInChat: DispatchStateHandler<string> = async (dispatch, state, action) => {
+export const deleteChat: DispatchStateHandler<string> = async (dispatch, state, action) => {
     try {
-        const response = await chatAPI.deleteUsersInChat(Number(action), Number(state.selectChat));
+        const chat = state.chats.find(el => el.title === action);
 
-        if (hasError(response)) {
-            dispatch({ loginFormError: response.reason });
+        const me = await authAPI.me();
+
+        const getUser: UserDTO[] = await userData.searchUser(action);
+
+        if (hasError(getUser)) {
+            dispatch({ loginFormError: getUser.reason })
             return;
         }
 
-        if(state.chatUsers.length === 1) {
-     
-            dispatch({ chatUsers: [], selectChat: '', chats: [] });
-            return
-        }
-        
-        const chatUsers = await chatAPI.getChatUsers(state.selectChat);
+        const findUser = await getUser.find(el => el.login === action);
 
-        if (hasError(chatUsers)) {
-            dispatch({ loginFormError: chatUsers.reason });
-            return;
-        }
-
-        dispatch({ chatUsers });
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-export const deleteChatById: DispatchStateHandler<number> = async (dispatch, _state, action) => {
-    try {
-
-        await chatAPI.delete(action)
+        await chatAPI.deleteUsersInChat([findUser!.id, me.id], chat!.id)
 
         const chats = await chatAPI.meChats();
 
-        dispatch({ chats, selectChat: "" });
-    } catch (error) {
-        console.error(error);
-    }
-}
+        const updateChatKeys = chats.map(async chat => {
+            const chatUsers: any = await chatAPI.getChatUsers(chat.id);
 
+            const findUser = chatUsers.find((user: any) => user.login !== me.login)
 
-export const createChatByTitle: DispatchStateHandler<string> = async (dispatch, _state, action) => {
-    try {
+            return {
+                ...chat, user: transformUser(findUser as UserDTO), title: findUser.login
+            }
+        })
 
-        await chatAPI.create(action);
+        await Promise.all(updateChatKeys).then((chats) => {
+            dispatch({ user: transformUser(me as UserDTO), chats });
+        });
 
-        const chats = await chatAPI.meChats();
-
-        dispatch({ chats });
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-export const getChatUsers: DispatchStateHandler<string> = async (dispatch, _state, action) => {
-    try {
-        const chatUsers = await chatAPI.getChatUsers(action);
-
-        dispatch({ chatUsers });
     } catch (error) {
         console.error(error);
     }
