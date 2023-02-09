@@ -23,8 +23,6 @@ export { default as UserActionButton } from './home-components/user-action-butto
 export { default as UserActionWindow } from './home-components/user-action-window';
 export { default as ActionButton } from './home-components/action-button';
 export { default as ActionInput } from './home-components/action-input';
-export { default as DeleteButton } from './home-components/delete-button';
-export { default as Button } from './home-components/button';
 
 export { default as BackLink } from './profile-components/back-link'
 export { default as ChangeData } from './profile-components/change-data'

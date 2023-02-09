@@ -1,8 +1,11 @@
 import { authAPI } from 'api/auth';
 import { UserDTO } from 'api/types';
 import { userData } from 'api/userData';
+import type { Dispatch } from 'core';
 import { transformUser } from 'utils';
 import { hasError } from 'utils/apiHasError';
+
+type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>
 
 export const changeUserProfile: DispatchStateHandler<UserDTO> = async (dispatch, _state, action) => {
     try {
@@ -34,7 +37,7 @@ export const changeUserAvatar: DispatchStateHandler<File> = async (dispatch, _st
     }
 }
 
-export const changePassword: DispatchStateHandler<{oldPassword: string, newPassword: string}> = async (dispatch, _state, action) => {
+export const changePassword: DispatchStateHandler<{ oldPassword: string, newPassword: string }> = async (dispatch, _state, action) => {
     try {
         const response = await userData.password(action)
 

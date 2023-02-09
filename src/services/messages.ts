@@ -1,13 +1,16 @@
 import { chatAPI } from 'api/chat';
+import type { Dispatch } from 'core';
+
+type DispatchStateHandler<TAction> = (dispatch: Dispatch<AppState>, state: AppState, action: TAction) => Promise<void>;
 
 export const createChatRoom: DispatchStateHandler<string> = async (dispatch, state, chatId) => {
     try {
         dispatch({ messages: [] })
 
         const { token } = await chatAPI.getToken(chatId);
-        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${state.user!.id}/${chatId}/${token}`);
+        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${state.user?.id}/${chatId}/${token}`);
 
-        dispatch({ socket, selectChat: chatId })
+        dispatch({ socket, selectChat: true })
 
         socket.addEventListener('open', () => {
             console.log('Соединение установлено');
@@ -52,8 +55,8 @@ export const createChatRoom: DispatchStateHandler<string> = async (dispatch, sta
 
         socket.addEventListener('error', (event: Event) => {
             console.log('Error:', (event as any).message);
-          });
-          
+        });
+
     } catch (e) {
         console.log(e)
     }

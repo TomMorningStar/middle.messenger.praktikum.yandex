@@ -8,14 +8,13 @@ interface UserActionWindowProps {
     label: string;
     action?: () => void;
     formError?: () => string | null;
-    placeholder?: string;
 }
 
 class UserActionWindow extends Block {
   static componentName = 'UserActionWindow';
 
-  constructor({buttonText, placeholder, label, store, formError, closeWindow, action}: UserActionWindowProps) {
-    super({buttonText, placeholder, label, store, formError, action, events: {click: closeWindow }})
+  constructor({buttonText, label, store, formError, closeWindow, action}: UserActionWindowProps) {
+    super({buttonText, label, store, formError, action, events: {click: closeWindow }})
 
     this.setProps({
       formError: () => this.props.store.getState().loginFormError,
@@ -34,13 +33,14 @@ class UserActionWindow extends Block {
 
         <h5 class="title">${this.props.label}</h5>
 
+        <label>Логин</label>
         <div>
-            {{{ActionInput placeholder="{{placeholder}}" ref="actionInput"}}}
+            {{{ActionInput ref="actionInput"}}}
             <div class="error">{{#if formError}}{{formError}}{{/if}}</div>
         </div>
 
         <div> 
-            {{{ActionButton styles="action-button cursor-pointer" action=action text="${this.props.buttonText}"}}}
+            {{{ActionButton action=action text="${this.props.buttonText}"}}}
         </div>
         </div>
     </div>`;
