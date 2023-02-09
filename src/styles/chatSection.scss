@@ -22,7 +22,6 @@
     top: 65px;
     right: 610px;
 
-
     .chat-users-block {
       min-width: 210px;
       z-index: 3;
@@ -32,9 +31,8 @@
       justify-content: space-between;
       padding: 15px;
       display: flex;
-
       box-shadow: 0 0 6px #00000024;
-  
+
       .info-burger {
         cursor: pointer;
         height: 25px;
@@ -42,12 +40,12 @@
         font-size: 12px;
         display: flex;
         justify-content: space-between;
-    
+
         &:hover {
           color: #3f99ff;
         }
       }
-    
+
       .icon {
         width: 23px;
         height: 23px;
@@ -62,8 +60,6 @@
       }
     }
   }
-
-
 
   .chat-dialog-info {
     display: flex;
@@ -125,15 +121,12 @@
       display: flex;
       position: absolute;
       bottom: 0;
-      right: 0px;
-      left: 0px;
+      left: 0;
       z-index: 1;
       right: 0;
       background-color: white;
 
       .inp-value-message {
-
-
         .select-file {
           width: 35px;
           height: 35px;
@@ -184,7 +177,6 @@
       &__text-wrapper {
         background-color: #eaeaea;
         width: 250px;
-        
         padding: 11px;
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
@@ -220,10 +212,6 @@
         font-size: 12px;
         max-width: 450px;
       }
-
     }
   }
-
-
-
 }

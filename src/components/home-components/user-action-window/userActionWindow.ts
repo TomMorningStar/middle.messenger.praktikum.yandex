@@ -8,7 +8,7 @@ interface UserActionWindowProps {
     label: string;
     action?: () => void;
     formError?: () => string | null;
-    placeholde?: string;
+    placeholder?: string;
 }
 
 class UserActionWindow extends Block {

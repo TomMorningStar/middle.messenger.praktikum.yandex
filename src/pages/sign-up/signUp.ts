@@ -1,5 +1,5 @@
 import { Block, CoreRouter, Store } from 'core';
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { Screens, withRouter, withStore } from 'utils';
 import { signUp } from 'services/auth';
 
@@ -122,8 +122,8 @@ export class SignUp extends Block {
   render() {
     return `
     <main>
-      <div class='authPage'>
-        <div class='authCart'>
+      <div class='auth-page'>
+        <div class='auth-cart'>
           <h3>Регистрация</h3>
 
             <form action=''>

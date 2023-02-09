@@ -1,6 +1,5 @@
-import { queryString } from "helpers/queryString";
 
-enum METHODS {
+export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -8,7 +7,7 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
-type PlainObject<T = unknown> = {
+export type PlainObject<T = unknown> = {
   [k in string]: T;
 };
 
@@ -17,6 +16,7 @@ type Options = {
   data?: any;
 };
 
+
 export class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
   protected endpoint: string;
@@ -24,8 +24,8 @@ export class HTTPTransport {
   constructor(endpoint: string) {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
-  public get<Response>(path = '/', data: PlainObject = {}): Promise<Response> {
-    return this.request<Response>(this.endpoint + path + queryString(data));
+  public get<Response>(path = '/', data?: PlainObject): Promise<Response> {
+    return this.request<Response>(this.endpoint + path + `${data ? data : ""}`);
   }
 
   public post<Response = void>(path: string, data?: unknown): Promise<Response> {

@@ -1,5 +1,4 @@
 import { Block, Store } from 'core';
-import { deleteUserInChat } from 'services/chat';
 import { withStore } from 'utils';
 
 import "./chatSection.scss";
@@ -31,13 +30,6 @@ class ChatSection extends Block {
           chatUsers: !this.props.chatUsers
         })
       },
-
-
-
-      
-
-
-      
     })
   }
 

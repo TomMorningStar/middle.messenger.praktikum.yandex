@@ -5,7 +5,7 @@ export const createChatRoom: DispatchStateHandler<string> = async (dispatch, sta
         dispatch({ messages: [] })
 
         const { token } = await chatAPI.getToken(chatId);
-        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${state.user.id}/${chatId}/${token}`);
+        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${state.user!.id}/${chatId}/${token}`);
 
         dispatch({ socket, selectChat: chatId })
 
@@ -50,9 +50,10 @@ export const createChatRoom: DispatchStateHandler<string> = async (dispatch, sta
             console.log('Получены данные', event.data);
         });
 
-        socket.addEventListener('error', event => {
-            console.log('Ошибка', event.message);
-        });
+        socket.addEventListener('error', (event: Event) => {
+            console.log('Error:', (event as any).message);
+          });
+          
     } catch (e) {
         console.log(e)
     }
@@ -60,7 +61,7 @@ export const createChatRoom: DispatchStateHandler<string> = async (dispatch, sta
 
 
 
-export const sendMessage: DispatchStateHandler<string> = async (dispatch, state, action) => {
+export const sendMessage: DispatchStateHandler<string> = async (_dispatch, state, action) => {
     state.socket.send(JSON.stringify({
         content: action,
         type: 'message'

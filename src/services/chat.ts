@@ -54,7 +54,7 @@ export const deleteUserInChat: DispatchStateHandler<string> = async (dispatch, s
     }
 }
 
-export const deleteChatById: DispatchStateHandler<number> = async (dispatch, state, action) => {
+export const deleteChatById: DispatchStateHandler<number> = async (dispatch, _state, action) => {
     try {
 
         await chatAPI.delete(action)
@@ -68,7 +68,7 @@ export const deleteChatById: DispatchStateHandler<number> = async (dispatch, sta
 }
 
 
-export const createChatByTitle: DispatchStateHandler<string> = async (dispatch, state, action) => {
+export const createChatByTitle: DispatchStateHandler<string> = async (dispatch, _state, action) => {
     try {
 
         await chatAPI.create(action);
@@ -81,7 +81,7 @@ export const createChatByTitle: DispatchStateHandler<string> = async (dispatch, 
     }
 }
 
-export const getChatUsers: DispatchStateHandler<string> = async (dispatch, state, action) => {
+export const getChatUsers: DispatchStateHandler<string> = async (dispatch, _state, action) => {
     try {
         const chatUsers = await chatAPI.getChatUsers(action);
 

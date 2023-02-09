@@ -17,7 +17,7 @@ export const userData = {
 
   changeUserAvatar: (data: File) => new HTTPTransport('/user/').put<UserDTO>('profile/avatar', data),
 
-  password: (data) => new HTTPTransport('/user/').put('password', data)
+  password: (data: {oldPassword: string, newPassword: string}) => new HTTPTransport('/user/').put('password', data)
 };
 
 

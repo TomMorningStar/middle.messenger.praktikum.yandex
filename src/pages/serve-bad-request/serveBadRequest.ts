@@ -1,6 +1,4 @@
 import { Block } from 'core';
-import { withRouter, withStore } from 'utils';
-
 
 export class ServerBadRequest extends Block {
   static componentName = 'ServerBadRequest';
@@ -20,5 +18,3 @@ export class ServerBadRequest extends Block {
     `;
   }
 }
-
-export default withRouter(withStore(ServerBadRequest));

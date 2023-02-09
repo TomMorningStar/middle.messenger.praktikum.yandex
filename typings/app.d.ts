@@ -34,7 +34,7 @@ declare global {
     loginFormError: string | null;
     user: User | null;
     chats: ChatInfo[];
-    soket: any;
+    socket: any;
     messages: Message[];
     selectChat: string;
     chatUsers: UserDTO[];

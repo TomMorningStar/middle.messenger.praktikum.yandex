@@ -44,7 +44,7 @@ export class DialogItem extends Block {
         : `<img class='item-img' src='https://cdn-icons-png.flaticon.com/512/924/924915.png' alt='avatar' />`}
             </div>
 
-            <div class='item-nickName'>{{nickName}}</div>
+            <div class='item-nick-name'>{{nickName}}</div>
 
             {{{DeleteButton deleteChat=deleteChat}}}
 

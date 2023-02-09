@@ -94,9 +94,6 @@
 
       .delete-button {
         color: red;
-        position: absolute;
-        top: 1;
-        right: 1;
         border: 1px solid red;
         padding: 2px;
         border-radius: 100%;
@@ -112,7 +109,7 @@
         border-radius: 100%;
       }
 
-      .item-nickName {
+      .item-nick-name {
         color: #1e1e1e;
         font-size: 12px;
         font-weight: 600;
@@ -130,8 +127,5 @@
         font-size: 11px;
       }
     }
-
-
-
   }
 }

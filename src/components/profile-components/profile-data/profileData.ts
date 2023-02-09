@@ -1,9 +1,12 @@
+import { CoreRouter, Store } from 'core';
 import Block from 'core/Block';
 import { logout } from 'services/auth';
 import { withRouter, withStore } from 'utils';
 
 interface ProfileDataProps {
   user: User;
+  router: CoreRouter;
+  store: Store<AppState>;
   signOut: () => void;
   goChangeDataPage: () => void;
   goChangePasswordPage: () => void;
@@ -44,7 +47,7 @@ class ProfileData extends Block {
 
         {{{ProfileButton goChangeDataPage=goChangeDataPage text="Изменить данные" styles="change-data cursor-pointer no-styles"}}}
         {{{ProfileButton goChangePasswordPage=goChangePasswordPage text="Изменить пароль" styles="change-data cursor-pointer no-styles"}}}
-        {{{ProfileButton signOut=signOut text="Выйти" styles="exit-in-profile-button cursor-pointer no-styles"}}}
+        {{{ProfileButton signOut=signOut id="profile-button" text="Выйти" styles="exit-in-profile-button cursor-pointer no-styles"}}}
     </div>
     
     `;

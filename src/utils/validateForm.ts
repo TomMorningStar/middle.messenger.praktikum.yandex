@@ -7,13 +7,13 @@ export enum ValifateRuleType {
   LastName = 'last-name',
   Phone = 'phone',
   Password = 'password',
-  NameInChat = 'first-name'
+  NameInChat = 'first-name',
   DisplayName = 'display-name'
 }
 
 type ValidateRule = {
   value: string;
-  type: ValidateRule;
+  type: ValifateRuleType;
 };
 
 export function validateForm(rules: ValidateRule[]) {
@@ -146,19 +146,16 @@ export function validateForm(rules: ValidateRule[]) {
     }
 
     if (type === ValifateRuleType.Password) {
-        const reg = /^(?=^.{8,40}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+      const reg = /^(?=^.{8,40}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
       if (!reg.test(value)) {
         password = 'Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра';
       }
 
-      if(value.length === 0) {
+      if (value.length === 0) {
         password = 'Поле не может быть пустым';
       }
     }
   }
-
-
-  
 
   return { authPassword, authLogin, mail, login, firstName, lastName, phone, password, displayName };
 }

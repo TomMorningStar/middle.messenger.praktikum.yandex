@@ -1,4 +1,4 @@
-import { Block, CoreRouter, Store } from 'core';
+import { Block, CoreRouter } from 'core';
 import { withRouter } from 'utils';
 
 interface ProfileLinkButtonProps {

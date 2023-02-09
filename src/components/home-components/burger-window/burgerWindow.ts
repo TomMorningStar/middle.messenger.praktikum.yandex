@@ -1,5 +1,5 @@
 import { Block, Store } from 'core';
-import { addUserToChat, deleteChat } from 'services/chat';
+import { addUserToChat } from 'services/chat';
 import { withStore } from 'utils';
 
 interface BurgerWindowProps {

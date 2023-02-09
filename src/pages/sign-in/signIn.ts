@@ -1,5 +1,5 @@
 import { Block, CoreRouter, Store } from 'core';
-import { validateForm, ValifateRuleType } from 'helpers/validateForm';
+import { validateForm, ValifateRuleType } from 'utils/validateForm';
 import { login } from 'services/auth';
 import { withStore, withRouter, Screens } from 'utils';
 
@@ -53,9 +53,9 @@ export class SignIn extends Block<SignInPageProps> {
   render() {
 
     return `
-      <main>
-        <div class='authPage'>
-          <div class='authCart'>
+      <main data-testid="sign-in-page">
+        <div class='auth-page'>
+          <div class='auth-cart'>
             <h3>Вход</h3>
 
             {{{ControlledInput 
