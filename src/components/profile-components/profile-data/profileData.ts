@@ -22,7 +22,6 @@ class ProfileData extends Block {
 
   signOut() {
     this.props.store.dispatch(logout)
-    this.props.router.go('/');
   }
 
   render() {

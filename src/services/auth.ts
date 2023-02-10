@@ -91,7 +91,7 @@ export const login: DispatchStateHandler<LoginPayload> = async (dispatch, _state
       dispatch({ chats });
     });
 
-    window.router.go('/settings');
+    window.router.go('/messenger');
   } catch (error) {
     console.error(error);
 
@@ -102,11 +102,10 @@ export const logout = async (dispatch: Dispatch<AppState>) => {
   try {
     await authAPI.logout();
 
-    dispatch({ user: null });
+    dispatch({ user: null, screen: '/' });
 
     window.router.go('/');
   } catch (error) {
     console.error(error);
-
   }
 };
