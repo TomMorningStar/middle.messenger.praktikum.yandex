@@ -67,8 +67,6 @@ class ChangePassword extends Block {
       this.setProps({
         error: '',
       });
-
-
     }
 
     this.refs.newPasswordRef.refs.errorRef.setProps({

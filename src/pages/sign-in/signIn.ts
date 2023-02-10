@@ -58,6 +58,7 @@ export class SignIn extends Block<SignInPageProps> {
           <div class='auth-cart'>
             <h3>Вход</h3>
 
+          <form>
             {{{ControlledInput 
               ref="loginInputRef"
               onInput=onInput
@@ -88,6 +89,7 @@ export class SignIn extends Block<SignInPageProps> {
               {{{SignButton ref="signButtonEl" onSubmit=onSubmit text="Авторизоваться"}}}
               {{{AuxiliaryButton text="Нет аккаунта?"}}}
             </div>
+          </form>
           </div>
         </div>
       </main>`;
