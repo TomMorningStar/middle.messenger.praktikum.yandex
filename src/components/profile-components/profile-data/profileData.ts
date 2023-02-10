@@ -22,7 +22,6 @@ class ProfileData extends Block {
 
   signOut() {
     this.props.store.dispatch(logout)
-    this.props.router.go('/');
   }
 
   render() {
@@ -44,7 +43,7 @@ class ProfileData extends Block {
 
         {{{ProfileButton goChangeDataPage=goChangeDataPage text="Изменить данные" styles="change-data cursor-pointer no-styles"}}}
         {{{ProfileButton goChangePasswordPage=goChangePasswordPage text="Изменить пароль" styles="change-data cursor-pointer no-styles"}}}
-        {{{ProfileButton signOut=signOut text="Выйти" styles="exit-in-profile-button cursor-pointer no-styles"}}}
+        {{{ProfileButton signOut=signOut id="profile-button" text="Выйти" styles="exit-in-profile-button cursor-pointer no-styles"}}}
     </div>
     
     `;

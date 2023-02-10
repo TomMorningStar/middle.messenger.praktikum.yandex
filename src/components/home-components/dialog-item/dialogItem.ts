@@ -43,7 +43,7 @@ export class DialogItem extends Block {
               </div>
         <div class='item-info-wrappper'>
           <div class='item-info'>
-              <div class='item-nickName'>{{nickName}}</div>
+              <div class='item-nick-name'>{{nickName}}</div>
           </div>
         <div class='item-info'>
             <div class='item-text'>

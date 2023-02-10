@@ -31,13 +31,25 @@ export function initRouter(router: CoreRouter, store: Store<AppState>) {
   routes.forEach(route => {
     router.use(route.path, () => {
       const isAuthorized = Boolean(store.getState().user);
+
+
+      if((location.pathname === '/' || location.pathname === '/sign-up') && isAuthorized) {
+        store.dispatch({ screen: Screens.Home });
+        return;
+      }
+
       if (isAuthorized || !route.shouldAuthorized) {
         store.dispatch({ screen: route.block });
         return;
-      } else {
+      }
+      
+      if(!isAuthorized) {
         window.router.go('/')
         store.dispatch({ screen: Screens.SignIn });
       }
+
+      
+
     });
   });
 
