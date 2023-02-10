@@ -1,6 +1,6 @@
 # Messenger
 Ссылка на задеплоенный сайт:
-https://deploy-bxx8.onrender.com
+https://messanger-q4g9.onrender.com/
 
 Реализация lite версии <strong>React</strong>. 
 
