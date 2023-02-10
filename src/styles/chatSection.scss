@@ -33,7 +33,7 @@
   .chat-section-messages-wrapper {
     height: calc(100vh - 54px);
     overflow-y: scroll;
-    padding: 20px 0 60px 0;
+    padding: 20px 0 60px;
 
     &::-webkit-scrollbar {
       width: 14px;
@@ -58,15 +58,12 @@
       display: flex;
       position: absolute;
       bottom: 0;
-      right: 0px;
-      left: 0px;
+      left: 0;
       z-index: 1;
       right: 0;
       background-color: white;
 
       .inp-value-message {
-
-
         .select-file {
           width: 35px;
           height: 35px;
@@ -115,22 +112,22 @@
       flex-direction: column;
       align-items: flex-start;
     }
-    
+
     .message {
       max-width: 70%;
       padding: 10px;
       margin-bottom: 10px;
     }
-    
+
     .received {
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       align-self: flex-start;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       border-bottom-left-radius: 15px;
       margin-bottom: 10px;
     }
-    
+
     .sent {
       background-color: #d1e2ff;
       align-self: flex-end;
@@ -139,22 +136,10 @@
       border-bottom-left-radius: 15px;
       margin-bottom: 10px;
     }
-    
+
     .message-text {
       margin: 0;
       padding: 5px;
     }
   }
-
-
-
 }
-
-
-
-
-
-
-
-
-

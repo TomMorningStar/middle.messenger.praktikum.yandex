@@ -6,8 +6,6 @@ import { transformUser, apiHasError } from 'utils';
 
 export async function initApp(dispatch: Dispatch<AppState>) {
 
-  await new Promise(r => setTimeout(r, 700));
-
   try {
     const response = await authAPI.me();
     const chats = await chatAPI.meChats();
@@ -16,11 +14,12 @@ export async function initApp(dispatch: Dispatch<AppState>) {
       return;
     }
 
-    if (chats.length) {
+    dispatch({ user: transformUser(response as UserDTO) })
+
       const updateChatKeys = chats.map(async chat => {
         const chatUsers: any = await chatAPI.getChatUsers(chat.id);
 
-        const findUser = chatUsers.find((user: any) => user.login !== response.login)
+        const findUser = await chatUsers.find((user: any) => user.login !== response.login);
 
         return {
           ...chat, user: transformUser(findUser as UserDTO), title: findUser.login
@@ -28,11 +27,9 @@ export async function initApp(dispatch: Dispatch<AppState>) {
       })
 
       await Promise.all(updateChatKeys).then((chats) => {
-        dispatch({ user: transformUser(response as UserDTO), chats });
+        dispatch({ chats });
       });
-    } else {
-      dispatch({ user: transformUser(response as UserDTO) })
-    }
+
   } catch (err) {
     console.error(err);
   } finally {

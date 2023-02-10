@@ -78,7 +78,6 @@
     .item-img {
       width: 47px;
       height: 47px;
-
       border-radius: 100%;
     }
 
@@ -96,7 +95,7 @@
         }
       }
 
-      .item-nickName {
+      .item-nick-name {
         color: #1e1e1e;
         font-size: 12px;
         font-weight: 600;
@@ -108,14 +107,13 @@
         color: #999;
       }
 
-      .item-nickName,
+      .item-nick-name,
       .item-text {
         width: 193px;
         margin-right: 4px;
       }
 
       .item-amount-messages {
-
         width: 20px;
         height: 20px;
         line-height: 20px;

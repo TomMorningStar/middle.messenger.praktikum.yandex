@@ -33,6 +33,22 @@ export const signUp: DispatchStateHandler<SignupPayload> = async (dispatch, _sta
 
     dispatch({ user: transformUser(responseUser as UserDTO) });
 
+    const chats = await chatAPI.meChats();
+
+    const updateChatKeys = chats.map(async chat => {
+      const chatUsers: any = await chatAPI.getChatUsers(chat.id);
+
+      const findUser = await chatUsers.find((user: any) => user.login !== responseUser.login);
+
+      return {
+        ...chat, user: transformUser(findUser as UserDTO), title: findUser.login
+      }
+    })
+
+    await Promise.all(updateChatKeys).then((chats) => {
+      dispatch({ chats });
+    });
+
     window.router.go('/settings');
   } catch (error) {
     console.error(error);
@@ -57,9 +73,23 @@ export const login: DispatchStateHandler<LoginPayload> = async (dispatch, _state
       return;
     }
 
+    dispatch({ user: transformUser(responseUser as UserDTO) });
+
     const chats = await chatAPI.meChats();
 
-    dispatch({ user: transformUser(responseUser as UserDTO), chats });
+    const updateChatKeys = chats.map(async chat => {
+      const chatUsers: any = await chatAPI.getChatUsers(chat.id);
+
+      const findUser = await chatUsers.find((user: any) => user.login !== responseUser.login);
+
+      return {
+        ...chat, user: transformUser(findUser as UserDTO), title: findUser.login
+      }
+    })
+
+    await Promise.all(updateChatKeys).then((chats) => {
+      dispatch({ chats });
+    });
 
     window.router.go('/settings');
   } catch (error) {
