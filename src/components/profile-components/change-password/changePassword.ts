@@ -85,7 +85,11 @@ class ChangePassword extends Block {
     return `
       <div class='profle-page-wrapper'>
         <div class='info-profile-wrapper-block'>
-          <div class='profile-avatar' style="background-image: url(https://ya-praktikum.tech/api/v2/resources/${user.avatar})" ></div>
+        {{#if user.avatar}}
+          <div class='profile-avatar' style="background-image: url(https://ya-praktikum.tech/api/v2/resources/${user.avatar})"></div>
+          {{else}}
+            <div class='profile-avatar'></div>
+        {{/if}} 
 
           <div class='profile-info-block'>
             {{{ControlledInput
