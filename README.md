@@ -1,6 +1,6 @@
 # Messenger
 Ссылка на задеплоенный сайт:
-https://messanger-q4g9.onrender.com/
+https://messenger-sprint6.onrender.com
 
 Реализация lite версии <strong>React</strong>. 
 
