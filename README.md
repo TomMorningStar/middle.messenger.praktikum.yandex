@@ -11,6 +11,7 @@ https://messenger-sprint6.onrender.com
    <li>Jest</li>
    <li>Docker</li>
    <li>Webpack</li>
+   <li>Websocket</li>
 </ul>
 
 - `npm run start` — для сборки и запуска
